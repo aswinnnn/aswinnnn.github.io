@@ -1,4 +1,15 @@
 @import url(https://fonts.googleapis.com/css?family=News+Cycle:400,700);
+
+@font-face {
+  font-family: BlogFont;
+  src: url(/static/coopforged.ttf);
+}
+
+@font-face {
+  font-family: norm;
+  src: url(/static/micross.ttf);
+}
+
 html,
 body {
   width: 100%;
@@ -17,6 +28,7 @@ body {
   left: 50%;
   z-index: 1;
 }
+
 .starwars .start {
   font-size: 200%;
   width: 14em;
@@ -24,9 +36,11 @@ body {
   text-align: center;
   cursor: pointer;
 }
+
 .starwars .start span {
   color: #4bd5ee;
 }
+
 .starwars .intro {
   width: 15em;
   margin: 0 0 0 -7.5em;
@@ -35,16 +49,20 @@ body {
   color: #4bd5ee;
   opacity: 0;
   -webkit-animation: intro 6s ease-out 1s;
-          animation: intro 6s ease-out 1s;
+  animation: intro 6s ease-out 1s;
 }
+
 .starwars .logo {
   opacity: 0;
   -webkit-animation: logo 9s ease-out 9s;
-          animation: logo 9s ease-out 9s;
+  animation: logo 9s ease-out 9s;
+  white-space: pre-line;
 }
+
 .starwars .logo svg {
   width: inherit;
 }
+
 .starwars .titles {
   width: 14.65em;
   margin: 0 0 0 -7.325em;
@@ -57,29 +75,66 @@ body {
   transform-origin: 50% 100%;
   transform: perspective(300px) rotateX(25deg);
 }
-.starwars .titles > div {
+
+.starwars .titles>div {
   position: absolute;
   top: 100%;
   -webkit-animation: titles 81s linear 13s;
-          animation: titles 81s linear 13s;
+  animation: titles 81s linear 13s;
 }
-.starwars .titles > div > p {
+
+.starwars .titles>div>p {
   margin: 1.35em 0 1.85em 0;
   line-height: 1.35em;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
+
+.color-change {
+  display: flex;
+  justify-content: left;
+  justify-content: top;
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 14px 80px;
+  cursor: pointer;
+  color: rgb(0, 0, 0);
+  background-color: #f8f822;
+  font-size: 1.5rem;
+  font-family: 'norm';
+  font-weight: 999;
+  border: 1px solid rgb(0, 0, 0);
+  box-shadow: 2px 2px 5px #AFE9FF;
+  transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+}
+
+.color-change:hover {
+  color: #c997ff;
+  border: 1px solid #90d2f5;
+  box-shadow: 2px 2px 20px #c4eeff;
+}
+
+button.color-change {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
 @-webkit-keyframes intro {
   0% {
     opacity: 0;
   }
+
   20% {
     opacity: 1;
   }
+
   90% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
@@ -89,16 +144,20 @@ body {
   0% {
     opacity: 0;
   }
+
   20% {
     opacity: 1;
   }
+
   90% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
 }
+
 @-webkit-keyframes logo {
   0% {
     width: 18em;
@@ -106,11 +165,13 @@ body {
     transform: scale(2.75);
     opacity: 1;
   }
+
   50% {
     opacity: 1;
     width: 18em;
     margin: -9em 0 0 -9em;
   }
+
   100% {
     transform: scale(0.1);
     opacity: 0;
@@ -118,6 +179,7 @@ body {
     margin: -9em 0 0 -9em;
   }
 }
+
 @keyframes logo {
   0% {
     width: 18em;
@@ -125,11 +187,13 @@ body {
     transform: scale(2.75);
     opacity: 1;
   }
+
   50% {
     opacity: 1;
     width: 18em;
     margin: -9em 0 0 -9em;
   }
+
   100% {
     transform: scale(0.1);
     opacity: 0;
@@ -137,27 +201,33 @@ body {
     margin: -9em 0 0 -9em;
   }
 }
+
 @-webkit-keyframes titles {
   0% {
     top: 100%;
     opacity: 1;
   }
+
   95% {
     opacity: 1;
   }
+
   100% {
     top: 20%;
     opacity: 0;
   }
 }
+
 @keyframes titles {
   0% {
     top: 100%;
     opacity: 1;
   }
+
   95% {
     opacity: 1;
   }
+
   100% {
     top: 20%;
     opacity: 0;
