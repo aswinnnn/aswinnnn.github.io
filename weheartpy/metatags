@@ -1,5 +1,6 @@
 <!-- Primary Meta Tags -->
 <title>weheartpy: A fast, reliable API client for weheartit.com</title>
+<meta name="theme-color" content="#f689fa">
 <meta name="title" content="weheartpy: A fast, reliable API client for weheartit.com">
 <meta name="description" content="Unofficial client for the We Heart It API. weheartpy is a fast, reliable API wrapper for weheartit.com">
 
