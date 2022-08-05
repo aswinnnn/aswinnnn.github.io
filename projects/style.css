@@ -5,7 +5,7 @@ body {
   font-family: 'Source Serif Pro', serif;
   font-size: 14px;
   font-weight: 500;
-  background-color: #BCAAA4;
+  background-color: #a4bcbb;
   -webkit-font-smoothing: antialiased;
   justify-items: center;
 }
@@ -18,11 +18,13 @@ div a {
 
 .griddy {
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: auto auto;
   padding: 50px;
   align-items: center;
   column-gap: 20px;
   row-gap: 20px;
+  max-height: fit-content;
+  max-width: fit-content;
 }
 
 .title {
@@ -43,8 +45,8 @@ h3 {
 
 .card1 {
   /* Add shadows to create the "card" effect */
-  max-width: fit-content;
-  max-width: 180px;
+  max-width: 600px;
+  max-height: fit-content;
   word-wrap: break-word;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.5s;
@@ -52,8 +54,8 @@ h3 {
 
 .card2 {
   /* Add shadows to create the "card" effect */
+  max-width: 600px;
   max-height: fit-content;
-  max-width: 180px;
   word-wrap: break-word;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
@@ -61,15 +63,15 @@ h3 {
 .card3 {
   /* Add shadows to create the "card" effect */
   max-width: fit-content;
-  max-width: 180px;
+  max-height: fit-content;
   word-wrap: break-word;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
 }
 .card4 {
   /* Add shadows to create the "card" effect */
-  height: fit-content;
-  max-width: 180px;
+  max-width: 600px;
+  max-height: 300px;
   word-wrap: break-word;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.5s;
@@ -78,19 +80,19 @@ h3 {
 /* On mouse-over, add a deeper shadow */
 .card1:hover {
   box-shadow: 2px 2px 2px 10px rgba(127, 178, 185, 0.975);
-  color: rgb(193, 226, 255);
+  color: rgb(0, 0, 0);
 }
 .card2:hover {
   box-shadow: 2px 2px 2px 10px rgba(243, 130, 130, 0.826);
-  color: rgb(193, 226, 255);
+  color: rgb(0, 0, 0);
 }
 .card3:hover {
   box-shadow: 2px 2px 2px 10px rgba(164, 255, 216, 0.689);
-  color: rgb(193, 226, 255);
+  color: rgb(0, 0, 0);
 }
 .card4:hover {
   box-shadow: 2px 2px 2px 10px rgba(215, 218, 151, 0.89);
-  color: rgb(193, 226, 255);
+  color: rgb(0, 0, 0);
 }
 
 /* Add some padding inside the card container */
@@ -99,15 +101,14 @@ section {
 }
 
 div img {
-  max-width: 180px;
-  max-height: 265px;
-  object-fit: cover;
-  viewport-fit: contain;
+  max-width: 600px;
+  max-height: 300px;
+  object-fit: contain;
 
 }
 
 div img:hover {
-  max-width: 190px;
+  image-rendering: pixelated;
 }
 
 .broker {
@@ -116,10 +117,7 @@ div img:hover {
 }
 
 footer {
-  display: table;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
+  float: center;
 }
 
 footer a {
@@ -133,22 +131,100 @@ footer a:hover {
   text-shadow: 1px 1px 2px black;
 }
 
-@media screen and (max-width: 720px) {
+#headpopup {
+  display: none;
+  opacity: 0;
+}
+
+#popup {
+  display: none;
+  opacity: 0;
+}
+
+.card2:hover #popup {
+  display: inherit;
+  opacity: 100;
+  transition: opacity 1.5s;
+}
+
+.card2:hover #headpopup {
+  display: inherit;
+  opacity: 100;
+  transition: opacity 1.5s;
+}
+#headpopup2 {
+  display: none;
+  opacity: 0;
+}
+
+#popup2 {
+  display: none;
+  opacity: 0;
+}
+
+.card3:hover #popup2 {
+  display: inherit;
+  opacity: 100;
+  transition: opacity 1.5s;
+}
+
+.card3:hover #headpopup2 {
+  display: inherit;
+  opacity: 100;
+  transition: opacity 1.5s;
+}
+
+@media screen and (max-width: 800px) {
 
   .griddy {
     display: grid;
     grid-template-columns: auto;
-    padding: 20px;
+    padding: 25px;
     align-items: center;
-    justify-items: center;
     column-gap: 15px;
     row-gap: 15px;
+    max-height: auto;
+    max-width: auto;
+    grid-row: auto;
+    grid-column: auto;
+    grid-area: auto;
   }
 
-  img {
-    width: 180;
-    height: 265;
-    object-fit: cover;
+  div img {
+    max-width: 100%;
+    max-height: fit-content;
+    object-fit: fill;
   }
+
+  .card2 {
+    /* Add shadows to create the "card" effect */
+    max-width: 380px;
+    max-height: fit-content;
+    word-wrap: break-word;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+  }
+  .card3 {
+    /* Add shadows to create the "card" effect */
+    max-width: 380px;
+    max-height: fit-content;
+    word-wrap: break-word;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+  }
+
+  footer {
+    display: none;
+  }
+
+  .broker {
+    display: none;
+  }
+
+
+
+
   
+  
+
 }

@@ -80,6 +80,11 @@
         function LoadTitle() {
             setInterval(getCurrentTimeDate(), 60000)
         };
+
+        function ChangeClr(clr) {
+            document.body.style.backgroundColor = clr;
+        }
+        
     </script>
 </head>
 
@@ -89,7 +94,7 @@
 
     <div class="griddy">
 
-        <a href="/projects/" onload="getCurrentTimeDate()">
+        <a href="/projects/" onload="getCurrentTimeDate()" onclick="ChangeClr()">
 
             <div class="card1">
                 <img src="assets\marylin.jpg" alt="Avatar" style="width:100%">
@@ -101,10 +106,10 @@
 
         </a>
 
-        <a href="/about/">
+        <a href="/about/" onclick="ChangeClr('#000000')">
 
             <div class="card2">
-                <img src="assets/hendrix.jpg" alt="Avatar" style="width:100%">
+                <img src="https://media.discordapp.net/attachments/1002212458502557718/1004940667212009482/IMG_20220805_080405.jpg" alt="Avatar" style="width:100%">
                 <section class="container">
                     <h4><b>About</b></h4>
                     <p>Usual and unusual information.</p>
@@ -113,19 +118,19 @@
 
         </a>
 
-        <a href="/wall/">
+        <a href="/asgsc/">
 
             <div class="card3">
                 <img src="assets/morrison.png" alt="Avatar" style="width:100%">
                 <section class="container">
-                    <h4><b>Thought Wall</b></h4>
-                    <p>A wall of thoughts, written by anonymous, weird people.</p>
+                    <h4><b>Blog</b></h4>
+                    <p>Because why not. Really boring btw.</p>
                 </section>
             </div>
 
         </a>
 
-        <a href="/contact/">
+        <a href="/contact/" onclick="ChangeClr('#fec0ca')">
             <div class="card4">
                 <img src="assets/joan.jpg" alt="Avatar" style="width:100%">
                 <section class="container">

@@ -48,14 +48,14 @@ body {
   font-weight: 400;
   color: #4bd5ee;
   opacity: 0;
-  -webkit-animation: intro 6s ease-out 1s;
-  animation: intro 6s ease-out 1s;
+  -webkit-animation: intro 4s ease-out 1s;
+  animation: intro 4s ease-out 1s;
 }
 
 .starwars .logo {
   opacity: 0;
-  -webkit-animation: logo 9s ease-out 9s;
-  animation: logo 9s ease-out 9s;
+  -webkit-animation: logo 6s ease-out 9s;
+  animation: logo 6s ease-out 9s;
   white-space: pre-line;
 }
 
@@ -79,8 +79,8 @@ body {
 .starwars .titles>div {
   position: absolute;
   top: 100%;
-  -webkit-animation: titles 81s linear 13s;
-  animation: titles 81s linear 13s;
+  -webkit-animation: titles 48s linear 13s;
+  animation: titles 48s linear 13s;
 }
 
 .starwars .titles>div>p {
