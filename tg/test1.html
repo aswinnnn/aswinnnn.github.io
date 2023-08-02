@@ -1,33 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> {browserTitle} </title>
     <style>
+        [data-theme='light'] {
+            --background-color: #facece;
+            --title-color: #000;
+            --text-color: #333;
+            --post-color: #c16b6b;
+            --post-title-color: #310614;
+            --post-text-color: #000;
+            --link-color: #000000;
+            --footer-background-color: #4d2c2c;
+            --footer-text-color: #aaa;
+        }
+
+        [data-theme='dark'] {
+            --background-color: #000000;
+            --title-color: #fff;
+            --text-color: #fff6f6;
+            --post-color: #483645;
+            --post-title-color: #fdc4d7;
+            --post-text-color: #fff;
+            --link-color: #ffffff;
+            --footer-background-color: #8a68ad;
+            --footer-text-color: #fac0c0;
+        }
+
         body {
+            display: grid;
+            grid-auto-flow: row;
+            gap: 0px;
             font-family: Arial, Helvetica, sans-serif;
             /* Fallback to Arial and then any sans-serif font */
             line-height: 1.6;
             margin: 0;
             padding: 0;
             /* background-color: #2d2d2d; */
-            background-color: #facece;
+            background-color: var(--background-color);
             /* Dark gray background */
             /* Light gray text color */
             width: 100vw;
+            max-height: fit-content;
             height: 100vh;
         }
 
         article {
             max-width: 99vw;
-            margin-left: 3vh;
-            margin-right: 3vh;
-            margin-top: 1vh;
+            margin-left: 1vw;
+            margin-right: 1vw;
+            margin-top: -28vh;
             margin-bottom: 2vh;
-            padding: 7vh;
-            background-color: #c16b6b;
+            /* padding-top: 8vw; */
+            padding: 1vw;
+            background-color: var(--post-color);
             /* Dark gray content background */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
             border-radius: 1vh;
@@ -52,7 +81,7 @@
             /* Use a sans-serif type font for headings */
             font-size: 2rem;
             margin-top: 0;
-            color: #310614;
+            color: var(--post-title-color);
         }
 
         article h2:hover {
@@ -77,12 +106,13 @@
         }
 
         article p {
+            color: var(--post-text-color);
             font-size: 1.1rem;
             margin-bottom: 1.5rem;
         }
 
         article a {
-            color: #000000;
+            color: var(--link-color);
             /* Light salmon link color */
             text-decoration: dashed saddlebrown;
         }
@@ -93,15 +123,45 @@
 
         footer {
             text-align: center;
+            max-height: fit-content;
+            padding: 1%;
             background-color: #4d2c2c;
             /* Dark gray footer background */
             color: #aaa;
             /* Light gray footer text color */
-            padding: 3vh;
         }
 
         footer p {
             margin: 0;
+        }
+
+        .color-scheme {
+            max-width: 0px;
+            max-height: 0px;
+        }
+
+        /* Switch styles */
+        .switch {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 40px;
+            height: 20px;
+            background-color: #ccc;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .switch:before {
+            content: "";
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 16px;
+            height: 16px;
+            background-color: #fff;
+            border-radius: 50%;
+            transition: transform 0.3s;
         }
 
         @keyframes coolAnimation {
@@ -118,11 +178,15 @@
 
             100% {
                 opacity: 1;
-                transform: rotate(0) scale(1);
+                transform: rotate(0) scale(0.8);
             }
         }
-
+        .title {
+            height: 80px;
+        }
         .title h1 {
+            height: fit-content;
+            color: var(--title-color);
             opacity: 0;
             font-family: 'Times New Roman', Times, serif;
             animation: coolAnimation 1.5s ease forwards;
@@ -135,8 +199,8 @@
 
         @media only screen and (max-width: 600px) {
             article {
-                margin: 2vh;
-                padding: 3vh;
+                margin: 2vw;
+                padding: 2vh;
             }
 
             article h2 {
@@ -152,19 +216,31 @@
             }
 
             .title h1 {
-                font-size: 1.8rem;
+                font-size: 5.5vw;
             }
 
             footer p {
+                display: table;
                 font-size: 0.9rem;
             }
+        }
+
+        /* Dark mode styles */
+        input[type="checkbox"]:checked+.switch:before {
+            transform: translateX(20px);
+            background-color: #333;
         }
     </style>
 </head>
 
+<div class="title">
+    <h1 align="center"> thought garden. </h1>
+</div>
 <body>
-    <div class="title">
-        <h1 align="center"> thought garden. </h1>
+    <!-- Dark mode toggle button -->
+    <div class="color-scheme">
+        <input type="checkbox" id="mode-switch" style="display: none;">
+        <label for="mode-switch" class="switch"></label>
     </div>
 
     <article>
@@ -179,5 +255,18 @@
         <p>&copy; 2023 Thought Garden. All rights reserved.</p>
     </footer>
 </body>
+
+<script>
+    const modeSwitch = document.getElementById('mode-switch');
+
+    modeSwitch.addEventListener('change', () => {
+        if (modeSwitch.checked) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    });
+
+</script>
 
 </html>
