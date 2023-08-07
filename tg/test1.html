@@ -57,11 +57,12 @@
             /* padding-top: 8vw; */
             padding: 1vw;
             background-color: var(--post-color);
+            transition: background-image 0.8s ease-in-out;
             /* Dark gray content background */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
             border-radius: 1vh;
         }
-
+        
         @keyframes pulseAnimation {
             0% {
                 transform: scale(1);
@@ -122,12 +123,14 @@
         }
 
         footer {
+            grid-row: 4;
             text-align: center;
-            max-height: fit-content;
+            text-shadow: 0.5px 0.5px #596672;
+            max-height: 4rem;
             padding: 1%;
-            background-color: #4d2c2c;
+            /* background-color: #4d2c2c; */
             /* Dark gray footer background */
-            color: #aaa;
+            color: #7a6363;
             /* Light gray footer text color */
         }
 
@@ -181,9 +184,11 @@
                 transform: rotate(0) scale(0.8);
             }
         }
+
         .title {
             height: 80px;
         }
+
         .title h1 {
             height: fit-content;
             color: var(--title-color);
@@ -198,9 +203,16 @@
         }
 
         @media only screen and (max-width: 600px) {
+            body {
+                height: 35vh;
+            }
+
             article {
+                max-width: 87vw;
                 margin: 2vw;
                 padding: 2vh;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
             }
 
             article h2 {
@@ -212,7 +224,7 @@
             }
 
             article p {
-                font-size: 1rem;
+                font-size: 4vw;
             }
 
             .title h1 {
@@ -220,7 +232,7 @@
             }
 
             footer p {
-                display: table;
+                text-align: center;
                 font-size: 0.9rem;
             }
         }
@@ -236,6 +248,7 @@
 <div class="title">
     <h1 align="center"> thought garden. </h1>
 </div>
+
 <body>
     <!-- Dark mode toggle button -->
     <div class="color-scheme">
