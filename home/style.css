@@ -77,7 +77,7 @@ div a {
 }
 
 div a:visited {
-  color: inherit;
+    color: inherit;
 }
 
 .griddy {
@@ -168,6 +168,10 @@ footer a:hover {
 }
 
 @media screen and (max-width: 720px) {
+    div a:visited {
+        text-decoration: none;
+        color: inherit;
+    }
     .griddy {
         grid-template-columns: auto;
         padding: 20px;
