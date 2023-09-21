@@ -1,195 +1,183 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@700&display=swap');
 
+.hidden {
+  max-width: 180px;
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateX(-100%);
+}
+
+
+
+@keyframes timeanim {
+  0% {
+    filter: blur(4px);
+  }
+  50% {
+    filter: blur(2px);
+  }
+  100% {
+    filter: blur(0);
+  }
+}
+
+.timeanim {
+  animation: timeanim 2s linear forwards; 
+}
+.show {
+  max-width: 180px;
+  opacity: 1;
+  filter: blur(0);
+  transition: all  1s;
+  transform: translateX(0);
+}
+
+.griddy a:nth-child(1) {
+  transition-delay: 800ms;
+}
+
+.griddy a:nth-child(2) {
+  transition-delay: 600ms;
+}
+
+.griddy a:nth-child(3) {
+  transition-delay: 400ms;
+}
+
+.griddy a:nth-child(4) {
+  transition-delay: 200ms;
+}
+
+
 body {
-  margin: 40px 0;
-  font-family: 'Source Serif Pro', serif;
-  font-size: 14px;
-  font-weight: 500;
-  background-color: #BCAAA4;
-  -webkit-font-smoothing: antialiased;
-  justify-items: center;
+    margin: 40px 0;
+    font-family: 'Source Serif Pro', serif;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #BCAAA4;
+    -webkit-font-smoothing: antialiased;
+    justify-items: center;
 }
 
 body::-webkit-scrollbar {
-  width: 0.9em;
+    width: 0.9em;
 }
 
 body::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: #bea9a2;
-  outline: 1px solid #ab9791;
+    background-color: #bea9a2;
+    outline: 1px solid #ab9791;
 }
 
 div a {
-  text-decoration: none;
-  text-decoration-color: black;
-  color: black;
+    text-decoration: none;
+}
+
+div a:visited {
+  color: inherit;
 }
 
 .griddy {
-  display: grid;
-  grid-template-columns: auto auto auto auto;
-  padding: 50px;
-  align-items: center;
-  column-gap: 20px;
-  row-gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    padding: 50px;
+    align-items: center;
+    column-gap: 20px;
+    row-gap: 20px;
 }
 
 .griddy:hover {
-  animation-play-state: paused;
+    animation-play-state: paused;
 }
-
-/* The animation */
 
 @keyframes griddy {
-  0% {
-    transform: translateX(0, 100%);
-  }
-
-  100% {
-    transform: translateX(-100%, 0);
-  }
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }
 
-/* media query to enable animation for only those who want it */
-@media (prefers-reduced-motion: no-preference) {
-  .griddy {
-    animation: marquee 15s linear infinite;
-  }
+.title, h3 {
+    font-family: 'Source Serif Pro', serif;
+    text-align: center;
 }
 
 .title {
-  font-family: 'Source Serif Pro', serif;
-  font-size: 24px;
-  font-weight: 700;
-  color: #5D4037;
-  text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: #5D4037;
 }
 
 h3 {
-  font-family: 'Source Serif Pro', serif;
-  font-size: 16px;
-  color: #5D4037;
-  text-align: center;
-  padding: 0;
+    font-size: 16px;
+    color: #5D4037;
 }
 
-.card1 {
-  /* Add shadows to create the "card" effect */
-  max-width: fit-content;
-  max-width: 180px;
-  word-wrap: break-word;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.5s;
+.card1, .card2, .card3, .card4 {
+    max-width: 180px;
+    max-height: fit-content;
+    word-wrap: break-word;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.5s;
 }
 
-.card2 {
-  /* Add shadows to create the "card" effect */
-  max-height: fit-content;
-  max-width: 180px;
-  word-wrap: break-word;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
+.card1:hover, .card2:hover, .card3:hover, .card4:hover {
+    box-shadow: 2px 2px 2px 10px rgba(127, 178, 185, 0.975), rgba(193, 226, 255);
+    color: rgb(193, 226, 255);
 }
 
-.card3 {
-  /* Add shadows to create the "card" effect */
-  max-width: fit-content;
-  max-width: 180px;
-  word-wrap: break-word;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
-}
-
-.card4 {
-  /* Add shadows to create the "card" effect */
-  height: fit-content;
-  max-width: 180px;
-  word-wrap: break-word;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.5s;
-}
-
-/* On mouse-over, add a deeper shadow */
-.card1:hover {
-  box-shadow: 2px 2px 2px 10px rgba(127, 178, 185, 0.975);
-  color: rgb(193, 226, 255);
-}
-
-.card2:hover {
-  box-shadow: 2px 2px 2px 10px rgba(243, 130, 130, 0.826);
-  color: rgb(193, 226, 255);
-}
-
-.card3:hover {
-  box-shadow: 2px 2px 2px 10px rgba(164, 255, 216, 0.689);
-  color: rgb(193, 226, 255);
-}
-
-.card4:hover {
-  box-shadow: 2px 2px 2px 10px rgba(215, 218, 151, 0.89);
-  color: rgb(193, 226, 255);
-}
-
-/* Add some padding inside the card container */
 section {
-  padding: 2px 16px;
+    padding: 2px 16px;
 }
 
 div img {
-  max-width: 180px;
-  max-height: 265px;
-  object-fit: cover;
-  viewport-fit: contain;
-
+    max-width: 180px;
+    max-height: 265px;
+    object-fit: cover;
 }
 
 div img:hover {
-  max-width: 190px;
+    max-width: 190px;
 }
 
 .broker {
-  border-top: 3px solid rgb(149, 97, 97);
-  border-radius: 65%;
+    border-top: 3px solid rgb(149, 97, 97);
+    border-radius: 65%;
 }
 
 footer {
-  display: table;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
+    display: table;
+    text-align: center;
+    margin: 0 auto;
 }
 
 footer a {
-  color: darkred;
-  text-decoration: dashed;
+    color: darkred;
+    text-decoration: dashed;
 }
 
 footer a:hover {
-  text-decoration-color: black;
-  text-decoration: dotted;
-  text-shadow: 1px 1px 2px black;
+    text-decoration-color: black;
+    text-decoration: dotted;
+    text-shadow: 1px 1px 2px black;
 }
 
 @media screen and (max-width: 720px) {
+    .griddy {
+        grid-template-columns: auto;
+        padding: 20px;
+        justify-items: center;
+        column-gap: 15px;
+        row-gap: 15px;
+    }
 
-  .griddy {
-    display: grid;
-    grid-template-columns: auto;
-    padding: 20px;
-    align-items: center;
-    justify-items: center;
-    column-gap: 15px;
-    row-gap: 15px;
-  }
-
-  img {
-    width: 180;
-    height: 265;
-    object-fit: cover;
-  }
-
+    img {
+        width: 180px;
+        height: 265px;
+    }
 }
