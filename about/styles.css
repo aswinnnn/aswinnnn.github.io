@@ -9,7 +9,6 @@
   font-family: norm;
   src: url(/static/micross.ttf);
 }
-
 html,
 body {
   width: 100%;
@@ -93,15 +92,13 @@ body {
 
 .color-change {
   display: flex;
-  justify-content: top;
-  justify-items: right;
   border-radius: 5px;
-  font-size: 10px;
   padding: 5px 20px;
+  margin-left: 10px;
   cursor: pointer;
   color: rgb(0, 0, 0);
-  background-color: #f8f822;
-  font-size: 1rem;
+  background-color: #8a8a41c6;
+  font-size: 2.5vw;
   font-family: 'norm';
   font-weight: 999;
   border: 1px solid rgb(0, 0, 0);
@@ -109,7 +106,21 @@ body {
   transition-duration: 0.5s;
   -webkit-transition-duration: 0.5s;
   -moz-transition-duration: 0.5s;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+
+@media screen and (max-width: 480px) {
+  .color-change {
+    margin-left: 2px;
+
+  }
+
+  .titles {
+    
+  }
+
+}
+
 
 .color-change:hover {
   color: #c997ff;

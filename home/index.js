@@ -12,12 +12,14 @@ const observer = new IntersectionObserver((entries) => {
 const hiddenelems = document.querySelectorAll(".hidden");
 hiddenelems.forEach((e) => observer.observe(e));
 
+// ------------------------ //
+
 window.addEventListener('scroll', () => {
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
     const scrollFraction = scrollTop / maxScroll;
     const startColor = [188, 170, 164]; // RGB values of the initial background color
-    const endColor = [0,0,0]; // RGB values of the final background color
+    const endColor = [0, 0, 0]; // RGB values of the final background color
 
     // Calculate the interpolated background color
     const interpolatedColor = startColor.map((channel, index) =>
@@ -39,4 +41,8 @@ window.addEventListener('scroll', () => {
         card.style.boxShadow = `0 0 6px 3px ${boxShadowColor}`;
     });
 });
+
+
+
+
 
