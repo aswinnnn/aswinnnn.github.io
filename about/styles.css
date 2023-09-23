@@ -1,235 +1,236 @@
-@import url(https://fonts.googleapis.com/css?family=News+Cycle:400,700);
-
-@font-face {
-  font-family: BlogFont;
-  src: url(/static/coopforged.ttf);
-}
-
-@font-face {
-  font-family: norm;
-  src: url(/static/micross.ttf);
-}
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Quantico);
 
 html,
 body {
-  width: 100%;
-  height: 100%;
-  font: 700 1em "News Cycle", sans-serif;
-  letter-spacing: .15em;
-  color: #ff6;
-  background: #000;
-  overflow: hidden;
-  margin: 0;
+    background: #111;
 }
 
-.starwars section {
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  z-index: 1;
+#container {
+    display: flex;
+    flex-direction: column;
+    background: #111;
+    position: absolute;
+    left: 50%;
+    top: 50%;
 }
 
-.starwars .start {
-  font-size: 200%;
-  width: 14em;
-  margin: -4em 0 0 -7em;
-  text-align: center;
-  cursor: pointer;
+#stats {
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
 
-.starwars .start span {
-  color: #4bd5ee;
+/* Info */
+@keyframes show-info {
+    0% {
+        transform: rotateY(120deg);
+    }
+
+    100% {
+        transform: rotateY(0deg);
+    }
 }
 
-.starwars .intro {
-  width: 15em;
-  margin: 0 0 0 -7.5em;
-  font-size: 200%;
-  font-weight: 400;
-  color: #4bd5ee;
-  opacity: 0;
-  -webkit-animation: intro 4s ease-out 1s;
-  animation: intro 4s ease-out 1s;
+.info {
+    transition: all 180ms ease-out;
+    transform-style: preserve-3d;
+    transform: perspective(800px);
+    font-family: "Quantico", sans-serif;
+    position: absolute;
+    font-size: 12px;
+    opacity: 0.8;
+    color: #fff;
+    width: 220px;
+    left: 0px;
+    top: 20px;
 }
 
-.starwars .logo {
-  opacity: 0;
-  -webkit-animation: logo 6s ease-out 9s;
-  animation: logo 6s ease-out 9s;
-  white-space: pre-line;
-}
-
-.starwars .logo svg {
-  width: inherit;
-}
-
-.starwars .titles {
-  width: 14.65em;
-  margin: 0 0 0 -7.325em;
-  top: auto;
-  bottom: 0;
-  height: 50em;
-  font-size: 350%;
-  text-align: justify;
-  overflow: hidden;
-  transform-origin: 50% 100%;
-  transform: perspective(300px) rotateX(25deg);
-}
-
-.starwars .titles>div {
-  position: absolute;
-  top: 100%;
-  -webkit-animation: titles 48s linear 13s;
-  animation: titles 48s linear 13s;
-}
-
-.starwars .titles>div>p {
-  margin: 1.35em 0 1.85em 0;
-  line-height: 1.35em;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-
-.color-change {
-  display: flex;
-  justify-content: top;
-  justify-items: right;
-  border-radius: 5px;
-  font-size: 10px;
-  padding: 5px 20px;
-  cursor: pointer;
-  color: rgb(0, 0, 0);
-  background-color: #f8f822;
-  font-size: 1rem;
-  font-family: 'norm';
-  font-weight: 999;
-  border: 1px solid rgb(0, 0, 0);
-  box-shadow: 2px 2px 5px #AFE9FF;
-  transition-duration: 0.5s;
-  -webkit-transition-duration: 0.5s;
-  -moz-transition-duration: 0.5s;
-}
-
-.color-change:hover {
-  color: #c997ff;
-  border: 1px solid #90d2f5;
-  box-shadow: 2px 2px 20px #c4eeff;
-}
-
-button.color-change {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-
-@-webkit-keyframes intro {
-  0% {
-    opacity: 0;
-  }
-
-  20% {
+.info:hover {
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.05);
     opacity: 1;
-  }
-
-  90% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
 }
 
-@keyframes intro {
-  0% {
-    opacity: 0;
-  }
-
-  20% {
-    opacity: 1;
-  }
-
-  90% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
+.info h1,
+.info h2,
+.info h3 {
+    line-height: 1;
+    margin: 5px 0;
 }
 
-@-webkit-keyframes logo {
-  0% {
-    width: 18em;
-    margin: -9em 0 0 -9em;
-    transform: scale(2.75);
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 1;
-    width: 18em;
-    margin: -9em 0 0 -9em;
-  }
-
-  100% {
-    transform: scale(0.1);
-    opacity: 0;
-    width: 18em;
-    margin: -9em 0 0 -9em;
-  }
+.info a {
+    transition: all 200ms ease-out;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    opacity: 0.6;
+    color: #fff;
 }
 
-@keyframes logo {
-  0% {
-    width: 18em;
-    margin: -9em 0 0 -9em;
-    transform: scale(2.75);
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 1;
-    width: 18em;
-    margin: -9em 0 0 -9em;
-  }
-
-  100% {
-    transform: scale(0.1);
-    opacity: 0;
-    width: 18em;
-    margin: -9em 0 0 -9em;
-  }
+.info a:hover {
+    opacity: 0.99;
 }
 
-@-webkit-keyframes titles {
-  0% {
-    top: 100%;
-    opacity: 1;
-  }
-
-  95% {
-    opacity: 1;
-  }
-
-  100% {
-    top: 20%;
-    opacity: 0;
-  }
+.info .about,
+.info .more {
+    transform-origin: 0% 50%;
+    transform: rotateY(120deg);
+    margin-bottom: 1px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 12px 15px 12px 20px;
 }
 
-@keyframes titles {
-  0% {
-    top: 100%;
-    opacity: 1;
-  }
+.info .about {
+    animation: show-info 500ms cubic-bezier(0.23, 1, 0.32, 1) 600ms 1 normal forwards;
+    padding-bottom: 15px;
+}
 
-  95% {
-    opacity: 1;
-  }
+.info .about a {
+    opacity: 0.9;
+}
 
-  100% {
-    top: 20%;
-    opacity: 0;
-  }
+.info .about h1 {
+    letter-spacing: -1px;
+    font-weight: 300;
+    font-size: 19px;
+    opacity: 0.95;
+}
+
+.info .about h2 {
+    font-weight: 300;
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.info .about h3 {
+    /* text-transform: uppercase; */
+    margin-top: 10px;
+    font-size: 11px;
+    line-height: normal;
+}
+
+.info .about h3:before {
+    margin-right: 2px;
+    font-size: 14px;
+    content: "›";
+}
+
+.info .more {
+    animation: show-info 500ms cubic-bezier(0.23, 1, 0.32, 1) 500ms 1 normal forwards;
+    padding: 5px 15px 10px 20px;
+}
+
+.info a {
+    text-transform: uppercase;
+    margin-right: 10px;
+    font-size: 10px;
+}
+
+.secinfo {
+    transition: all 180ms ease-out;
+    transform-style: preserve-3d;
+    transform: perspective(800px);
+    font-family: "Quantico", sans-serif;
+    position: absolute;
+    font-size: 12px;
+    opacity: 0.8;
+    color: #fff;
+    width: 720px;
+    left: 300px;
+    top: 20px;
+}
+
+.secinfo:hover {
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.05);
+    opacity: 1;
+}
+
+.secinfo h1,
+.secinfo h2,
+.secinfo h3 {
+    line-height: 1;
+    margin: 5px 0;
+}
+
+.secinfo a {
+    transition: all 200ms ease-out;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    opacity: 0.6;
+    color: #fff;
+}
+
+.secinfo a:hover {
+    opacity: 0.99;
+}
+
+.secinfo .about,
+.secinfo .more {
+    transform-origin: 0% 50%;
+    transform: rotateY(120deg);
+    margin-bottom: 1px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 12px 15px 12px 20px;
+}
+
+.secinfo .about {
+    animation: show-info 500ms cubic-bezier(0.23, 1, 0.32, 1) 600ms 1 normal forwards;
+    padding-bottom: 15px;
+}
+
+.secinfo .about a {
+    opacity: 0.9;
+}
+
+.secinfo .about h1 {
+    letter-spacing: -1px;
+    font-weight: 300;
+    font-size: 19px;
+    opacity: 0.95;
+}
+
+.secinfo .about h2 {
+    font-weight: 300;
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.secinfo .about h3 {
+    /* text-transform: uppercase; */
+    margin-top: 10px;
+    font-size: 11px;
+    line-height: normal;
+}
+
+.secinfo .about h3:before {
+    margin-right: 2px;
+    font-size: 14px;
+    content: "›";
+}
+
+.secinfo .more {
+    animation: show-info 500ms cubic-bezier(0.23, 1, 0.32, 1) 500ms 1 normal forwards;
+    padding: 5px 15px 10px 20px;
+}
+
+.secinfo a {
+    text-transform: uppercase;
+    margin-right: 10px;
+    font-size: 10px;
+}
+
+@media screen and (max-width: 480px) {
+    .secinfo {
+        transition: all 180ms ease-out;
+        transform-style: preserve-3d;
+        transform: perspective(800px);
+        font-family: "Quantico", sans-serif;
+        position: absolute;
+        font-size: 12px;
+        opacity: 0.8;
+        color: #fff;
+        width: 347px;
+        left: 0px;
+        top: 470px;
+        padding-left: 2.5%;
+    }
 }
