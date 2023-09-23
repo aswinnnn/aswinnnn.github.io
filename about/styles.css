@@ -1,6 +1,20 @@
+<<<<<<< HEAD
 @charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Quantico);
 
+=======
+@import url(https://fonts.googleapis.com/css?family=News+Cycle:400,700);
+
+@font-face {
+  font-family: BlogFont;
+  src: url(/static/coopforged.ttf);
+}
+
+@font-face {
+  font-family: norm;
+  src: url(/static/micross.ttf);
+}
+>>>>>>> 4dd7f80af029633654b5c40cf4e786d4bee1eace
 html,
 body {
     background: #111;
@@ -46,8 +60,99 @@ body {
     top: 20px;
 }
 
+<<<<<<< HEAD
 .info:hover {
     box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.05);
+=======
+.starwars .logo {
+  opacity: 0;
+  -webkit-animation: logo 6s ease-out 9s;
+  animation: logo 6s ease-out 9s;
+  white-space: pre-line;
+}
+
+.starwars .logo svg {
+  width: inherit;
+}
+
+.starwars .titles {
+  width: 14.65em;
+  margin: 0 0 0 -7.325em;
+  top: auto;
+  bottom: 0;
+  height: 50em;
+  font-size: 350%;
+  text-align: justify;
+  overflow: hidden;
+  transform-origin: 50% 100%;
+  transform: perspective(300px) rotateX(25deg);
+}
+
+.starwars .titles>div {
+  position: absolute;
+  top: 100%;
+  -webkit-animation: titles 48s linear 13s;
+  animation: titles 48s linear 13s;
+}
+
+.starwars .titles>div>p {
+  margin: 1.35em 0 1.85em 0;
+  line-height: 1.35em;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+
+.color-change {
+  display: flex;
+  border-radius: 5px;
+  padding: 5px 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  color: rgb(0, 0, 0);
+  background-color: #8a8a41c6;
+  font-size: 2.5vw;
+  font-family: 'norm';
+  font-weight: 999;
+  border: 1px solid rgb(0, 0, 0);
+  box-shadow: 2px 2px 5px #AFE9FF;
+  transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+@media screen and (max-width: 480px) {
+  .color-change {
+    margin-left: 2px;
+
+  }
+
+  .titles {
+    
+  }
+
+}
+
+
+.color-change:hover {
+  color: #c997ff;
+  border: 1px solid #90d2f5;
+  box-shadow: 2px 2px 20px #c4eeff;
+}
+
+button.color-change {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+@-webkit-keyframes intro {
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+>>>>>>> 4dd7f80af029633654b5c40cf4e786d4bee1eace
     opacity: 1;
 }
 
