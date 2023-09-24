@@ -33,6 +33,7 @@ body {
 }
 
 .info {
+    pointer-events: none;
     transition: all 180ms ease-out;
     transform-style: preserve-3d;
     transform: perspective(800px);
@@ -104,7 +105,7 @@ body {
 .info .about h3 {
     /* text-transform: uppercase; */
     margin-top: 10px;
-    font-size: 11px;
+    font-size: 13px;
     line-height: normal;
 }
 
@@ -126,17 +127,18 @@ body {
 }
 
 .secinfo {
+    pointer-events: none;
     transition: all 180ms ease-out;
     transform-style: preserve-3d;
     transform: perspective(800px);
     font-family: "Quantico", sans-serif;
     position: absolute;
-    font-size: 12px;
+    font-size: 22px;
     opacity: 0.8;
     color: #fff;
     width: 720px;
     left: 300px;
-    top: 20px;
+    top: 80px;
 }
 
 .secinfo:hover {
@@ -147,6 +149,7 @@ body {
 .secinfo h1,
 .secinfo h2,
 .secinfo h3 {
+    font-size: 22px;
     line-height: 1;
     margin: 5px 0;
 }
@@ -219,7 +222,12 @@ body {
 }
 
 @media screen and (max-width: 480px) {
+    :root {
+        overflow-x: hidden;
+    }
+
     .secinfo {
+        pointer-events: none;
         transition: all 180ms ease-out;
         transform-style: preserve-3d;
         transform: perspective(800px);
@@ -230,7 +238,14 @@ body {
         color: #fff;
         width: 347px;
         left: 0px;
-        top: 470px;
+        top: 520px;
         padding-left: 2.5%;
+    }
+
+    .secinfo .about h2 {
+        font-weight: 300;
+        font-size: 13px;
+        opacity: 0.8;
+        line-height: 108%;
     }
 }
