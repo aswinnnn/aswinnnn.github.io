@@ -8,8 +8,8 @@
   /* this has to be set to switch between light or dark */
   color-scheme: light dark;
 
-  --light-bg: #F5EFF7;
-  --light-article-bg: #FFD8E4;
+  --light-bg: #FFD8E4;
+  --light-article-bg: #F5EFF7;
   --light-text: black;
   --light-text-title: #333;
 
@@ -35,16 +35,16 @@ body {
 }
 
 .aswin {
-  font-family: 'monospace';
-  font-size: 0.9rem;
+  font-family: 'Courier Prime';
+  font-size: 1.2rem;
   color: light-dark(var(--light-text-title),var(--dark-text-title));
   position: absolute;
-  margin-left: 1.23vw;
+  margin-left: 0.65vw;
   margin-top: 1%;
 }
 .main-content {
   flex: 1;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 .article {
@@ -53,8 +53,7 @@ body {
   background-color: light-dark(var(--light-article-bg), var(--dark-article-bg));
   border-radius: 0.3rem;
   padding: 1rem;
-  box-shadow: inset 1px 2px 5px #333;
-
+  border: 5px 5px 5px black;
 }
 
 .article-title {
@@ -67,9 +66,9 @@ body {
 .date {
   font-family: 'Arial', 'Open Sans';
   font-size: 0.9rem;
-  font-weight: 30;
+  font-weight: 70;
   line-height: 1rem;
-  color: grey;
+  color: #333;
   margin-left: 0.12rem;
 }
 
@@ -94,12 +93,12 @@ body {
 }
 @media screen and (max-width: 767px) {
   .aswin {
-    font-family: 'monospace';
-    font-size: 0.8rem;
+    font-family: 'Courier Prime';
+    font-size: 1.2rem;
     color: light-dark(var(--light-text-title),var(--dark-text-title));
     position: absolute;
-    margin-left: 4.5vw;
-    margin-top: 3.4%;
+    margin-left: 2.5vw;
+    margin-top: 2.4%;
   }
 }
 
