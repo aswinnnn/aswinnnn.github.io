@@ -8,24 +8,48 @@
     <link rel="stylesheet" href="style.css">
     <style>
 @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Jersey+15&display=swap');
-    </style><script>
+</style><script>
     function mode() {
       let body = document.getElementById("body");
       let butt = document.getElementById("butt");
       if ( body.className.match("dark") ) {
         body.className = "light"
-        butt.innerHTML = "🌙"
+        butt.innerHTML = "🌒"
       }
       else {
         body.className = "dark"
         butt.innerHTML = "🌞"
       }
     }
+    function animateText(elementId) {
+      const element = document.getElementById(elementId);
+      if (!element) return; // Handle element not found
+
+  const text = "🌒 ⇽ dark mode !!!";
+      let currentText = "";
+      let isAppearing = true; // Flag to track animation direction
+
+      const intervalId = setInterval(() => {
+        if (isAppearing) {
+          currentText += text[currentText.length];
+          if (currentText === text) {
+            isAppearing = false; // Switch to disappearing animation
+          }
+        } else {
+          currentText = currentText.slice(0, currentText.length - 1);
+          if (currentText === "🌒") {
+            clearInterval(intervalId); // Stop after disappearing
+          }
+        }
+        element.innerHTML = currentText;
+      }, 140); // animation speed (ms)
+    }
+
     </script>
   </head>
 
-  <body class="light" id="body">
-    <h6 class="aswin">aswin's notes.</h6>
+  <body class="light" id="body" onload="animateText('butt')">
+    <a href="./all"><h6 class="aswin">aswin's notes.</h6> </a>
     <button class="top-right-button" onClick="mode()" id="butt">🌙</button>
     <main class="main-content">
       <article class="article">
