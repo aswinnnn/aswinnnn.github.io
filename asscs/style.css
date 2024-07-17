@@ -37,14 +37,17 @@ body {
 .aswin {
   font-family: 'Courier Prime';
   font-size: 1.2rem;
+  text-align: center;
   color: light-dark(var(--light-text-title),var(--dark-text-title));
   position: absolute;
   margin-left: 0.65vw;
-  margin-top: 1%;
+  margin-top: 1.5%;
+  padding-bottom: 1rem;
 }
 
 .aswin:hover {
 font-variation-settings: 'wdth' 60;
+font-style: italic;
 }
 .main-content {
   flex: 1;
@@ -52,7 +55,7 @@ font-variation-settings: 'wdth' 60;
 }
 
 .article {
-  margin-top: 1.8rem;
+  margin-top: 5rem;
   margin-bottom: 2rem;
   background-color: light-dark(var(--light-article-bg), var(--dark-article-bg));
   border-radius: 0.3rem;
@@ -62,7 +65,7 @@ font-variation-settings: 'wdth' 60;
 
 .article-title {
   font-family: 'Helvetica';
-  font-size: 1.9rem;
+  font-size: 1.5rem;
   margin-bottom: 0.5rem;
   margin-top: -0.75rem;
   color: light-dark(var(--light-text),var(--dark-text));
@@ -104,5 +107,21 @@ font-variation-settings: 'wdth' 60;
     margin-left: 2.5vw;
     margin-top: 2.4%;
   }
+
+  .top-right-button {
+    top: 3rem;
+  }
 }
 
+
+
+
+@media screen and (min-width: 1000px) {
+  .article {
+    margin-top: 2rem;
+  }
+  .aswin {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
