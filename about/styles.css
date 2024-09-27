@@ -21,6 +21,11 @@ body {
     top: 10px;
 }
 
+#cv {
+  background-color: #fff;
+  box-shadow: 1px 1px 1px 1px;
+}
+
 /* Info */
 @keyframes show-info {
     0% {
@@ -127,7 +132,6 @@ body {
 }
 
 .secinfo {
-    pointer-events: none;
     transition: all 180ms ease-out;
     transform-style: preserve-3d;
     transform: perspective(800px);
@@ -227,7 +231,6 @@ body {
     }
 
     .secinfo {
-        pointer-events: none;
         transition: all 180ms ease-out;
         transform-style: preserve-3d;
         transform: perspective(800px);

@@ -68,7 +68,7 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-track {
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    /* box-shadow: 0 0 6px rgba(0, 0, 0, 0.3); */
 }
 
 body::-webkit-scrollbar-thumb {
@@ -132,7 +132,7 @@ h3 {
     max-width: 180px;
     max-height: min-content;
     word-wrap: initial;
-    box-shadow: 4px 8px 0 rgba(0, 0, 0, 0.2) inset;
+    /* box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2); */
     transition: 0.5s;
 }
 
@@ -186,7 +186,7 @@ footer a:hover {
     } */
 
     .card {
-        border: 1px double dashed #fdf1ed7d;
+        /* border: 0px double dashed #fdf1ed7d; */
         border-collapse: separate;
     }
     .griddy {
