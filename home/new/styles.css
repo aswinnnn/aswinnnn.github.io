@@ -1,13 +1,13 @@
 :root {
-    --primary-color: #f3c0c0;
-    --accent-color: #302020;
-    --hover-color: #e8f97e;
+    --primary-color: #e1f5f8;
+    --accent-color: #3c2626;
+    --hover-color: #eaf5a7;
 }
 
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Helvetica Neue', sans-serif;
+    font-family: 'Lexend Deca','Helvetica Neue';
     background-color: var(--primary-color);
     color: var(--accent-color);
     overflow: hidden;
@@ -34,7 +34,7 @@ body {
 }
 
 .glitch {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Lexend Deca',Arial, Helvetica, sans-serif;
     font-size: 3rem;
     font-weight: bold;
     position: relative;
@@ -42,6 +42,8 @@ body {
                 -0.025em -0.05em 0 rgba(0,255,0,0.75),
                 0.025em 0.05em 0 rgba(0,0,255,0.75);
     animation: glitch 500ms infinite;
+
+    margin-top: -10%;
 }
 
 .menu {
@@ -85,9 +87,16 @@ body {
     right: -150px;
     width: 300px;
     height: 300px;
-    background: #000;
+    background: repeating-radial-gradient(
+        circle at 50% 50%,
+        #000000,
+        #000000 5px,
+        #111111 6px,
+        #111111 9px
+    );
     border-radius: 50%;
     transition: transform 0.3s ease;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
 .vinyl-label {
@@ -97,8 +106,57 @@ body {
     transform: translate(-50%, -50%);
     width: 100px;
     height: 100px;
-    background: #444;
+    background: radial-gradient(
+        circle at 50% 50%,
+        #ff3c3c,
+        #d62828
+    );
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.vinyl-label::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background: #000;
+    border-radius: 50%;
+}
+
+.vinyl-grooves {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.vinyl-grooves::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-radial-gradient(
+        circle at 50% 50%,
+        transparent,
+        transparent 10px,
+        rgba(255, 255, 255, 0.1) 10px,
+        rgba(255, 255, 255, 0.1) 11px
+    );
 }
 
 @keyframes glitch {
