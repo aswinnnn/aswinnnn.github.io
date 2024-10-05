@@ -8,10 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Album artwork URLs - replace with your favorite albums
     const albums = {
-        album1: '/home/assets/art/bookends.avif', // Replace with actual album URLs
-        album2: '/home/assets/art/are-you-experienced.avif',
-        album3: '/home/assets/art/maggot-brain.avif',
-        album4: '/home/assets/art/goo.avif'
+        album1: '/home/assets/hendrix.avif', // Replace with actual album URLs
+        album2: '/home/assets/joan.avif',
+        album3: '/home/assets/morrison.avif',
+        album4: '/home/assets/marylin.avif'
     };
 
     // Set up album artworks
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function resetVinyl() {
         isSpinning = false;
         rotation = 0;
-        vinylRecord.style.transition = 'transform 800ms ease';
+        vinylRecord.style.transition = 'transform 1s ease';
         vinylRecord.style.transform = `rotate(${rotation}deg)`;
         
         // Reset active artwork

@@ -9,39 +9,52 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
     </style>
+    <script>
+        function clickvinyl() {
+            let tag = document.getElementById('body');
+            if (tag.getAttribute('data-theme') == 'work') {
+                tag.setAttribute('data-theme', 'life');
+            }
+            else {
+                tag.setAttribute('data-theme', 'work');
+            }
+        }
+    </script>
 </head>
 
-<body>
+<body data-theme="work" id="body">
     <div class="noise-overlay"></div>
     <main class="container">
         <h1 class="glitch" data-text="ASWIN.">aswin.</h1>
 
         <nav class="menu">
             <div class="menu-item" data-text="PROJECTS">
-                <span>projects.</span>
+                <span>projects</span>
                 <div class="menu-item-desc">things i've worked on publicly</div>
             </div>
             <div class="menu-item" data-text="ABOUT">
-                <span>about.</span>
+                <span>about</span>
                 <div class="menu-item-desc">usual and unusual information</div>
             </div>
             <div class="menu-item" data-text="BLOG">
-                <span>blog.</span>
+                <span>blog</span>
                 <div class="menu-item-desc">writings on various topics</div>
             </div>
             <div class="menu-item" data-text="CONTACT">
-                <span>contact.</span>
+                <span>contact</span>
                 <div class="menu-item-desc">get in touch</div>
             </div>
         </nav>
 
-        <!-- Replace the existing vinyl-record div with this: -->
-        <div class="vinyl-record">
-            <div class="vinyl-grooves"></div>
-            <div class="vinyl-label">
-                Aswin.
-            </div>
+        <div class="vinyl-record" onclick="clickvinyl()">
+            <div class="vinyl-artwork" data-album="album1"></div>
+            <div class="vinyl-artwork" data-album="album2"></div>
+            <div class="vinyl-artwork" data-album="album3"></div>
+            <div class="vinyl-artwork" data-album="album4"></div>
+            <div class="vinyl-overlay"></div>
+            <div class="center-hole"></div>
         </div>
+
     </main>
     <script src="index.js"></script>
 </body>
