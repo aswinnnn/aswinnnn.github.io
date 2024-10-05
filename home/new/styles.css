@@ -178,6 +178,16 @@ body {
 
 
 @media screen and (max-width: 720px) {
+    .glitch {
+        font-size: 2.5rem;
+        margin-top: -86%;
+        top: 3rem;
+    }
+
+    .menu-item {
+        font-size: 1.5rem;
+    }
+
     .vinyl-record:hover {
             bottom: 5px;
             right: 6px;

@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const vinylRecord = document.querySelector('.vinyl-record');
     const vinylArtworks = document.querySelectorAll('.vinyl-artwork');
     const menuItems = document.querySelectorAll('.menu-item');
+    const menuItemDescs = document.querySelectorAll('.menu-item-desc');
     let rotation = 0;
     let isSpinning = false;
     let spinTimeout;
@@ -88,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Touch event handling for mobile
     menuItems.forEach((item, index) => {
         item.addEventListener('touchstart', (e) => {
+            menuItemDescs.forEach(desc => desc.style.opacity = 1);
             e.preventDefault(); // Prevent default touch behavior
             clearTimeout(spinTimeout);
             isSpinning = true;
@@ -101,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         item.addEventListener('touchend', () => {
-            spinTimeout = setTimeout(resetVinyl, 1000);
+            spinTimeout = setTimeout(resetVinyl, 800);
         });
     });
 
