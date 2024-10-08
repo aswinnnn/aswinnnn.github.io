@@ -14,9 +14,11 @@
             let tag = document.getElementById('body');
             if (tag.getAttribute('data-theme') == 'work') {
                 tag.setAttribute('data-theme', 'life');
+                document.querySelector('#album-info').style.opacity = 1;
             }
             else {
                 tag.setAttribute('data-theme', 'work');
+                document.querySelector('#album-info').style.opacity = 0;
             }
         }
     </script>
@@ -46,7 +48,7 @@
             </div>
         </nav>
 
-        <p id="album-info">simon & garfunkel - bookends</p>
+        <div id="album-info"></div>
         <div class="vinyl-record" onclick="clickvinyl()">
             <div class="vinyl-artwork" data-album="album1"></div>
             <div class="vinyl-artwork" data-album="album2"></div>

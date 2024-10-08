@@ -175,6 +175,29 @@ body {
     z-index: 2;
 }
 
+.vinyl-record {
+    cursor: grab;
+}
+
+.vinyl-record:active {
+    cursor: grabbing;
+}
+
+#album-info {
+    position: fixed;
+    bottom: 160px;  /* Adjust based on your vinyl record position */
+    right: 20px;    /* Adjust based on your vinyl record position */
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: black;
+    text-align: right;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.vinyl-record:hover + #album-info {
+    opacity: 1;
+}
 /* Add a container for main content to ensure it's above the vinyl */
 .container {
     position: relative;
