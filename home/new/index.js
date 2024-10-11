@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const vinylRecord = document.querySelector('.vinyl-record');
     const vinylArtworks = document.querySelectorAll('.vinyl-artwork');
     const menuItems = document.querySelectorAll('.menu-item');
+    const albumInfo = document.querySelector('#album-info');
     let rotation = 0;
     let isSpinning = false;
     let spinTimeout;
@@ -112,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function toggleVisbilityAlbumInfo() {
-        let a = document.querySelector('#album-info').style.opacity;
+        let a = albumInfo.style.opacity;
         if (a===0) {a = 1} else {a = 0}
     }
 
@@ -160,7 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     vinylArtworks.forEach(artwork => artwork.classList.remove('active'));
                     vinylArtworks[0].classList.add('active');
-                }, 1000);
+                    albumInfo.textContent = "<3"
+                }, 10000);
             }, 1000);
         });
     });
