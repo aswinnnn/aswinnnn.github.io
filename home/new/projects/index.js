@@ -32,7 +32,7 @@ function handleMouseMove(e) {
 
 // Function to handle device orientation for mobile
 function handleOrientation(e) {
-  if (!activeCard) return;
+  // if (!activeCard) return;
 
   const { beta, gamma } = e;
   if (beta === null || gamma === null) return;
@@ -100,6 +100,7 @@ function loadCardImages() {
         card.style.backgroundImage = `url(${imageUrl})`;
         card.style.backgroundSize = 'cover';
         card.style.backgroundPosition = 'center';
+        // card.style.backgroundColor = 'white';
         console.log(`Set background image for card ${index}`);
       };
       img.onerror = function() {

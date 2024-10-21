@@ -8,7 +8,7 @@ body {
 }
 
 .title {
-    font-family: "Raleway";
+    font-family: 'Times New Roman', Times, serif;
     font-size: 24px;
     font-weight: 700;
     color: #5D4037;
@@ -74,14 +74,14 @@ p+p {
     flex: 0 0 240px;
     width: 240px;
     height: 320px;
-    background-color: #333;
+    background-color: transparent;
     overflow: hidden;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.66) 0 30px 60px 0, inset #333 0 0 0 5px, inset rgba(255, 255, 255, 0.5) 0 0 0 6px;
     transition: 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
     margin: 1rem;
-    -webkit-backdrop-filter:  blur(5px);
-    backdrop-filter: blur(5px);
+    font-size: 1rem;
+    font-weight: bolder;
 }
 
 .card-bg {
@@ -139,4 +139,46 @@ p+p {
     font-size: 36px;
     font-weight: 700;
     text-shadow: rgba(0, 0, 0, 0.5) 0 10px 10px;
+}
+
+/* .header, .content {
+    font-family: 'Times New Roman', Times, serif;
+} */
+
+.card {
+    .header, .content {
+        font-family: 'Times New Roman', Times, serif;
+        color: #fff;
+        transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+}
+
+.card { 
+    .header {
+        -webkit-backdrop-filter: contrast(80%);
+        backdrop-filter: contrast(80%);
+    }
+    
+    .content {
+        -webkit-backdrop-filter: contrast(80%);
+        backdrop-filter: contrast(80%);
+    }
+}
+
+.card:hover {
+    background-blend-mode: luminosity;
+    .header {
+        -webkit-backdrop-filter: contrast(40%);
+        backdrop-filter: contrast(40%);
+    }
+    
+    .content {
+        -webkit-backdrop-filter: contrast(40%);
+        backdrop-filter: contrast(40%);
+    }
+}
+.card:active {
+    background-blend-mode: luminosity;
+    transition: all 1s ease-in-out;
 }
