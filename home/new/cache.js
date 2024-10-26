@@ -2,16 +2,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuItems = document.querySelectorAll('.menu-item');
     const cache = {
         html: {},
-        css: {}
+        css: {},
+        js: {},
+        dependencies: {} // Track resource dependencies for each page
     };
 
-    // Preload pages and CSS on hover
+    // Preload pages and resources on hover
     menuItems.forEach(item => {
         const url = item.getAttribute('href');
 
         item.addEventListener('mouseover', () => {
             if (!cache.html[url]) {
-                fetchPageAndCSS(url);
+                prefetchResources(url);
             }
         });
 
@@ -20,90 +22,158 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault();
             const pageUrl = item.getAttribute('href');
 
-            if (cache.html[pageUrl] && cache.css[pageUrl]) {
-                history.pushState({ url: pageUrl }, '', pageUrl); // Push new state
-                displayContent(cache.html[pageUrl], cache.css[pageUrl]); // Display cached HTML & CSS
+            if (isFullyCached(pageUrl)) {
+                history.pushState({ url: pageUrl }, '', pageUrl);
+                displayContent(pageUrl);
             } else {
-                fetchPageAndCSS(pageUrl, true); // Fetch page and push state
+                prefetchResources(pageUrl, true);
             }
         });
     });
 
-    // Fetch page HTML and CSS, and cache them
-    function fetchPageAndCSS(url, pushState = false) {
-        // Fetch HTML content
-        fetch(url)
-            .then(response => response.text())
-            .then(htmlContent => {
-                cache.html[url] = htmlContent; // Cache the HTML
+    // Check if all resources for a page are cached
+    function isFullyCached(url) {
+        return cache.html[url] &&
+            (!cache.dependencies[url]?.css || cache.dependencies[url].css.every(cssUrl => cache.css[cssUrl])) &&
+            (!cache.dependencies[url]?.js || cache.dependencies[url].js.every(jsUrl => cache.js[jsUrl]));
+    }
 
-                // Fetch CSS linked in the page
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(htmlContent, 'text/html');
-                const cssLinks = Array.from(doc.querySelectorAll('link[rel="stylesheet"]'));
+    // Fetch and cache all page resources
+    async function prefetchResources(url, shouldDisplay = false) {
+        try {
+            // Fetch and parse HTML
+            const htmlResponse = await fetch(url);
+            const htmlContent = await htmlResponse.text();
+            cache.html[url] = htmlContent;
 
-                // Fetch all CSS files
-                const cssPromises = cssLinks.map(link => {
-                    const cssUrl = link.getAttribute('href');
-                    return fetch(cssUrl).then(response => response.text());
-                });
+            // Parse HTML to find resources
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlContent, 'text/html');
 
-                // Once all CSS files are fetched
-                Promise.all(cssPromises).then(cssContents => {
-                    const combinedCSS = cssContents.join('\n'); // Combine all CSS files into one string
-                    cache.css[url] = combinedCSS; // Cache the combined CSS
+            // Initialize dependency tracking
+            cache.dependencies[url] = {
+                css: [],
+                js: []
+            };
 
-                    if (pushState) {
-                        history.pushState({ url }, '', url); // Push new state
-                        displayContent(htmlContent, combinedCSS); // Update page with HTML and CSS
+            // Fetch CSS
+            const cssLinks = Array.from(doc.querySelectorAll('link[rel="stylesheet"]'));
+            const cssPromises = cssLinks.map(async link => {
+                const cssUrl = link.getAttribute('href');
+                cache.dependencies[url].css.push(cssUrl);
+
+                if (!cache.css[cssUrl]) {
+                    try {
+                        const cssResponse = await fetch(cssUrl);
+                        cache.css[cssUrl] = await cssResponse.text();
+                    } catch (err) {
+                        console.error(`Error fetching CSS ${cssUrl}:`, err);
                     }
-                });
-            })
-            .catch(err => console.error(`Error fetching ${url}: `, err));
+                }
+            });
+
+            // Fetch JavaScript
+            const scripts = Array.from(doc.querySelectorAll('script[src]'));
+            const jsPromises = scripts.map(async script => {
+                const jsUrl = script.getAttribute('src');
+                cache.dependencies[url].js.push(jsUrl);
+
+                if (!cache.js[jsUrl]) {
+                    try {
+                        const jsResponse = await fetch(jsUrl);
+                        cache.js[jsUrl] = await jsResponse.text();
+                    } catch (err) {
+                        console.error(`Error fetching JavaScript ${jsUrl}:`, err);
+                    }
+                }
+            });
+
+            // Wait for all resources to be fetched
+            await Promise.all([...cssPromises, ...jsPromises]);
+
+            if (shouldDisplay) {
+                history.pushState({ url }, '', url);
+                displayContent(url);
+            }
+        } catch (err) {
+            console.error(`Error prefetching resources for ${url}:`, err);
+        }
     }
 
     // Handle popstate for back/forward buttons
     window.addEventListener('popstate', (event) => {
-        if (event.state && event.state.url) {
-            if (cache.html[event.state.url] && cache.css[event.state.url]) {
-                displayContent(cache.html[event.state.url], cache.css[event.state.url]); // Load from cache
+        if (event.state?.url) {
+            if (isFullyCached(event.state.url)) {
+                displayContent(event.state.url);
             } else {
-                fetchPageAndCSS(event.state.url); // Fetch the content if not cached
+                prefetchResources(event.state.url, true);
             }
         }
     });
 
-    // Function to update the content on the page and inject the CSS
-    function displayContent(htmlContent, cssContent) {
+    // Display cached content
+    function displayContent(url) {
         const mainContent = document.querySelector(':root');
-        if (mainContent) {
-            mainContent.innerHTML = htmlContent; // Replace content with the new one
-            injectCSS(cssContent); // Inject the CSS
-        } else {
+        if (!mainContent) {
             console.error('Main content container not found!');
+            return;
         }
 
-        location.replace(location.href) // lil pathetic gimmick to actually get the js running
+        // Update HTML content
+        mainContent.innerHTML = cache.html[url];
+
+        // Inject cached CSS
+        cache.dependencies[url]?.css?.forEach(cssUrl => {
+            injectCSS(cache.css[cssUrl], cssUrl);
+        });
+
+        // Inject cached JavaScript
+        cache.dependencies[url]?.js?.forEach(jsUrl => {
+            injectJS(cache.js[jsUrl], jsUrl);
+        });
+
+        // Initialize any new page-specific JavaScript
+        executeScripts();
     }
 
-    // Inject CSS into the document
-    function injectCSS(cssContent) {
-        let styleTag = document.querySelector('#dynamic-css');
+    // Inject CSS with source URL tracking
+    function injectCSS(cssContent, sourceUrl) {
+        let styleTag = document.querySelector(`style[data-source="${sourceUrl}"]`);
         if (!styleTag) {
             styleTag = document.createElement('style');
-            styleTag.id = 'dynamic-css';
+            styleTag.setAttribute('data-source', sourceUrl);
             document.head.appendChild(styleTag);
         }
-        styleTag.textContent = cssContent; // Insert fetched CSS
+        styleTag.textContent = cssContent;
     }
 
-    // Force page reload for homepage
-    function reloadHomePage() {
-        window.location.reload(); // Full page refresh for homepage
+    // Inject JavaScript with source URL tracking
+    function injectJS(jsContent, sourceUrl) {
+        let scriptTag = document.querySelector(`script[data-source="${sourceUrl}"]`);
+        if (!scriptTag) {
+            scriptTag = document.createElement('script');
+            scriptTag.setAttribute('data-source', sourceUrl);
+            scriptTag.textContent = jsContent;
+            document.body.appendChild(scriptTag);
+        }
     }
 
-    // Detect if homepage is loaded and refresh
+    // Execute scripts in the correct order after content update
+    function executeScripts() {
+        const scripts = document.querySelectorAll('script');
+        scripts.forEach(script => {
+            if (script.src) {
+                const newScript = document.createElement('script');
+                newScript.src = script.src;
+                document.body.appendChild(newScript);
+            } else {
+                eval(script.innerHTML);
+            }
+        });
+    }
+
+    // Detect if homepage and handle accordingly
     if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
-        reloadHomePage();
+        window.location.reload();
     }
 });

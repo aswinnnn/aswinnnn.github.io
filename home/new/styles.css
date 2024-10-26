@@ -2,6 +2,7 @@
     --primary-color: #93bfcf;
     --hover-color: #e4d9ff;
     --accent-color: #2c363f;
+    --menu-items-color: #6b0daeea;
     transition: all 1s;
 }
 
@@ -83,6 +84,13 @@ body {
     transition: opacity 0.3s ease;
     white-space: nowrap;
 }
+a[class="menu-item"] {
+    text-decoration: none;
+    transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    color: var(--menu-items-color);
+
+}
+
 
 .menu-item:hover .menu-item-desc {
     opacity: 1;
