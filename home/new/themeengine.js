@@ -189,7 +189,7 @@ export const ThemeEngine = {
     },
 
     // Enhanced animation application
-    apply(hue = Math.random() * 360) {
+    apply(hue = Math.sqrt(Math.random()) * 360) {
         const colors = this.generatePalette(hue);
         const root = document.documentElement;
         const current = {};
