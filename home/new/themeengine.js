@@ -1,8 +1,10 @@
+import { randomFloat } from "./utils.js";
+
 export const ThemeEngine = {
     // Constants
     PHI: 1.618033988749895,
     TAU: Math.PI * 2,
-    
+
     // Enhanced color harmony system
     harmony: {
         // Advanced color schemes based on artistic color theory
@@ -13,9 +15,9 @@ export const ThemeEngine = {
             tetradic: h => [h, (h + 90) % 360, (h + 180) % 360, (h + 270) % 360],
             analogous: h => [h, (h + 30) % 360, (h + 60) % 360],
         },
-        
+
         // Generate vibrant yet harmonious colors
-        generateHarmony(baseHue, scheme = 'splitComplementary') {
+        generateHarmony(baseHue, scheme = 'analogous') {
             const hues = this.schemes[scheme](baseHue);
             return hues.map(h => ({
                 h,
@@ -24,7 +26,7 @@ export const ThemeEngine = {
                 l: 45 + Math.cos(h * Math.PI / 180) * 10
             }));
         },
-        
+
         // Create aesthetically pleasing variations
         createVariation(color, index) {
             return {
@@ -45,14 +47,14 @@ export const ThemeEngine = {
                 [0.2, 1],
                 [1, 1]
             ],
-            
+
             evaluate(t) {
                 return this.deCasteljau(this.points, t);
             },
-            
+
             deCasteljau(points, t) {
                 if (points.length === 1) return points[0];
-                
+
                 const newPoints = [];
                 for (let i = 0; i < points.length - 1; i++) {
                     newPoints.push([
@@ -60,18 +62,18 @@ export const ThemeEngine = {
                         points[i][1] + (points[i + 1][1] - points[i][1]) * t
                     ]);
                 }
-                
+
                 return this.deCasteljau(newPoints, t);
             }
         },
 
         // Harmonic oscillator with damping
         harmonicMotion: {
-            create(frequency = 2, damping = 0.5, amplitude = 1) {
+            create(frequency = 28, damping = 0.8, amplitude = 3) {
                 return t => {
                     const omega = frequency * Math.PI * 2;
-                    return amplitude * Math.exp(-damping * t) * 
-                           Math.cos(Math.sqrt(1 - damping * damping) * omega * t);
+                    return amplitude * Math.exp(-damping * t) *
+                        Math.cos(Math.sqrt(1 - damping * damping) * omega * t);
                 };
             }
         },
@@ -121,7 +123,7 @@ export const ThemeEngine = {
                         this.luminance(r, g, b),
                         this.luminance(...background)
                     );
-                    
+
                     if (newRatio >= minRatio) {
                         return [r, g, b];
                     }
@@ -169,9 +171,9 @@ export const ThemeEngine = {
 
     // Enhanced color generation
     generatePalette(hue, complexity = 0.5) {
-        const scheme = complexity < 0.3 ? 'analogous' : 
-                      complexity < 0.6 ? 'splitComplementary' : 'tetradic';
-                      
+        const scheme = complexity < 0.3 ? 'analogous' :
+            complexity < 0.6 ? 'splitComplementary' : 'tetradic';
+
         const harmonyColors = this.harmony.generateHarmony(hue, scheme);
         const colors = harmonyColors.map((color, i) => {
             const variation = this.harmony.createVariation(color, i);
@@ -189,12 +191,15 @@ export const ThemeEngine = {
     },
 
     // Enhanced animation application
-    apply(hue = Math.sqrt(Math.random()) * 360) {
+    apply(hue = randomFloat({
+        minDifference: 0.5,
+        entropyFactor: 3
+    }) * 360) {
         const colors = this.generatePalette(hue);
         const root = document.documentElement;
         const current = {};
         const keys = ['primary', 'accent', 'menu-items', 'hover'];
-        
+
         keys.forEach((key, i) => {
             const cur = getComputedStyle(root).getPropertyValue(`--${key}-color`);
             current[key] = cur ? this.hexToRGB(cur) : colors[i];
@@ -244,6 +249,158 @@ export const ThemeEngine = {
             ((val >> 8) & 255) / 255,
             (val & 255) / 255
         ];
+    },
+
+    // Theme history management
+    _themeHistory: {
+        maxSize: 5,
+        hues: [],
+        schemes: [],
+
+        addTheme(hue, scheme) {
+            this.hues.push(hue);
+            this.schemes.push(scheme);
+
+            // Keep history within max size
+            if (this.hues.length > this.maxSize) {
+                this.hues.shift();
+                this.schemes.shift();
+            }
+        },
+
+        isHueSimilar(newHue) {
+            return this.hues.some(oldHue => {
+                const diff = Math.abs(newHue - oldHue);
+                // Consider hues similar if within 30 degrees or wrapped around (330 degrees)
+                return diff < 30 || diff > 330;
+            });
+        },
+
+        clear() {
+            this.hues = [];
+            this.schemes = [];
+        }
+    },
+
+    // Enhanced color generation with scheme tracking
+    generatePalette(hue, complexity = 0.5) {
+        const scheme = complexity < 0.3 ? 'analogous' :
+            complexity < 0.6 ? 'splitComplementary' : 'tetradic';
+
+        // Store the theme in history
+        this._themeHistory.addTheme(hue, scheme);
+
+        const harmonyColors = this.harmony.generateHarmony(hue, scheme);
+        const colors = harmonyColors.map((color, i) => {
+            const variation = this.harmony.createVariation(color, i);
+            return this.contrast.hslToRgb(variation.h, variation.s, variation.l);
+        });
+
+        // Ensure menu items are both readable and aesthetically pleasing
+        const menuItemColor = colors[2];
+        return [
+            colors[0], // primary
+            colors[1], // accent
+            this.contrast.ensureContrast(menuItemColor, colors[0], 0.9),
+            colors[3] || this.contrast.ensureContrast(colors[1], colors[0]) // hover
+        ];
+    },
+
+    // Generate a new hue that's distinctly different from recent ones
+    _generateDistinctHue() {
+        const maxAttempts = 10;
+        let attempts = 0;
+        let newHue;
+
+        do {
+            // Generate a new random hue
+            newHue = randomFloat({
+                minDifference: 0.5,
+                entropyFactor: 3
+            }) * 360;
+
+            attempts++;
+        } while (
+            this._themeHistory.isHueSimilar(newHue) &&
+            attempts < maxAttempts
+        );
+
+        // If we couldn't find a distinct hue after max attempts,
+        // use golden ratio to guarantee a different feel
+        if (attempts >= maxAttempts) {
+            const lastHue = this._themeHistory.hues[this._themeHistory.hues.length - 1] || 0;
+            newHue = (lastHue + this.PHI * 180) % 360;
+        }
+
+        return newHue;
+    },
+
+    // Cycle to a new theme that's distinctly different from recent ones
+    cycleTheme() {
+        const newHue = this._generateDistinctHue();
+
+        // Vary complexity based on previous schemes to avoid repetition
+        const lastScheme = this._themeHistory.schemes[this._themeHistory.schemes.length - 1];
+        let complexity;
+
+        if (lastScheme === 'analogous') {
+            complexity = 0.7; // Go for a more complex scheme
+        } else if (lastScheme === 'tetradic') {
+            complexity = 0.2; // Go for a simpler scheme
+        } else {
+            complexity = 0.5; // Use middle complexity
+        }
+
+        return this.apply(newHue, complexity);
+    },
+
+    // Enhanced apply method to accept complexity parameter
+    apply(hue = this._generateDistinctHue(), complexity = 0.5) {
+        const colors = this.generatePalette(hue, complexity);
+        const root = document.documentElement;
+        const current = {};
+        const keys = ['primary', 'accent', 'menu-items', 'hover'];
+
+        keys.forEach((key, i) => {
+            const cur = getComputedStyle(root).getPropertyValue(`--${key}-color`);
+            current[key] = cur ? this.hexToRGB(cur) : colors[i];
+        });
+
+        // Create composite animation function
+        const animationFn = this.animation.compose(
+            t => this.animation.bezier.evaluate(t)[1],
+            this.animation.harmonicMotion.create(1.5, 0.3, 0.15)
+        );
+
+        let start = null;
+        const duration = 300;
+
+        const animate = (now) => {
+            if (!start) start = now;
+            const elapsed = now - start;
+            const t = Math.min(1, elapsed / duration);
+            const easedT = animationFn(t);
+
+            keys.forEach((key, i) => {
+                const rgb = this.lerp(current[key], colors[i], easedT);
+                root.style.setProperty(
+                    `--${key}-color`,
+                    `rgb(${rgb.map(x => Math.round(x * 255)).join(',')})`
+                );
+            });
+
+            if (t < 1) requestAnimationFrame(animate);
+        };
+
+        requestAnimationFrame(animate);
+        return colors;
+    },
+
+    // ... (existing utility methods remain the same)
+
+    // Reset theme history
+    resetThemeHistory() {
+        this._themeHistory.clear();
     }
 };
 

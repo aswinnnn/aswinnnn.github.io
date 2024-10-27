@@ -27,6 +27,7 @@
     </script>
     <!-- <script src="cache.js"></script> -->
     <script src="themeengine.js" type="module" defer></script>
+    <script src="themenav.js" type="module" defer></script>
 </head>
 
 <body data-theme="work" id="body">
@@ -54,7 +55,7 @@
         </nav>
 
         <div id="album-info"></div>
-        <div class="vinyl-record" onclick="clickvinyl();ThemeEngine.apply();">
+        <div class="vinyl-record" onclick="clickvinyl();window.ThemeEngine.cycleTheme();">
             <div class="vinyl-artwork" data-album="album1"></div>
             <div class="vinyl-artwork" data-album="album2"></div>
             <div class="vinyl-artwork" data-album="album3"></div>
