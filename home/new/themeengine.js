@@ -396,12 +396,118 @@ export const ThemeEngine = {
         return colors;
     },
 
-    // ... (existing utility methods remain the same)
 
     // Reset theme history
     resetThemeHistory() {
         this._themeHistory.clear();
+    },
+
+    storage: {
+        KEY: 'website_theme_colors',
+
+        saveColors() {
+            const root = document.documentElement;
+            const colorVars = ['primary', 'accent', 'menu-items', 'hover'];
+
+            const savedColors = colorVars.reduce((acc, key) => {
+                acc[key] = root.style.getPropertyValue(`--${key}-color`);
+                return acc;
+            }, {});
+
+            localStorage.setItem(this.KEY, JSON.stringify(savedColors));
+        },
+
+        loadColors() {
+            const savedColors = localStorage.getItem(this.KEY);
+            if (savedColors) {
+                const colors = JSON.parse(savedColors);
+                Object.entries(colors).forEach(([key, value]) => {
+                    document.documentElement.style.setProperty(`--${key}-color`, value);
+                });
+                return true;
+            }
+            return false;
+        },
+
+        clearColors() {
+            localStorage.removeItem(this.KEY);
+        }
+    },
+
+    // Modify the apply method to save colors after animation
+    apply(hue = this._generateDistinctHue(), complexity = 0.5) {
+        const colors = this.generatePalette(hue, complexity);
+        const root = document.documentElement;
+        const current = {};
+        const keys = ['primary', 'accent', 'menu-items', 'hover'];
+
+        keys.forEach((key, i) => {
+            const cur = getComputedStyle(root).getPropertyValue(`--${key}-color`);
+            current[key] = cur ? this.hexToRGB(cur) : colors[i];
+        });
+
+        const animationFn = this.animation.compose(
+            t => this.animation.bezier.evaluate(t)[1],
+            this.animation.harmonicMotion.create(1.5, 0.3, 0.15)
+        );
+
+        let start = null;
+        const duration = 300;
+
+        const animate = (now) => {
+            if (!start) start = now;
+            const elapsed = now - start;
+            const t = Math.min(1, elapsed / duration);
+            const easedT = animationFn(t);
+
+            keys.forEach((key, i) => {
+                const rgb = this.lerp(current[key], colors[i], easedT);
+                const rgbString = `rgb(${rgb.map(x => Math.round(x * 255)).join(',')})`;
+                root.style.setProperty(`--${key}-color`, rgbString);
+            });
+
+            if (t < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                // Save colors to localStorage after animation completes
+                this.storage.saveColors();
+            }
+        };
+
+        requestAnimationFrame(animate);
+        return colors;
+    },
+
+    // Add initialization method
+    init() {
+        // Try to load saved colors first
+        const hasStoredColors = this.storage.loadColors();
+
+        // If no stored colors, apply default theme
+        if (!hasStoredColors) {
+            this.apply();
+        }
+
+        // Add initialization status
+        this._initialized = true;
+    },
+
+    // Reset everything
+    reset() {
+        this.storage.clearColors();
+        this.resetThemeHistory();
+        this.apply();
     }
 };
 
-if (typeof window !== 'undefined') window.ThemeEngine = ThemeEngine;
+// Initialize theme engine when the script loads
+if (typeof window !== 'undefined') {
+    window.ThemeEngine = ThemeEngine;
+    
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => ThemeEngine.init());
+    } else {
+        ThemeEngine.init();
+    }
+}

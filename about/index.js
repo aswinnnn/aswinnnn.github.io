@@ -3,7 +3,7 @@ var NUM_PARTICLES = ( ( ROWS = isMobile ? 350 : 200 ) * ( COLS = isMobile ?  150
     THICKNESS = Math.pow( 80, 2 ),
     SPACING = isMobile ? 4 : 2,
     MARGIN = 100,
-    COLOR = 240,
+    COLOR = 900,
     DRAG = 0.95,
     EASE = 0.15,
     

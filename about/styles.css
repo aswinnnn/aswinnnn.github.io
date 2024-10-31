@@ -3,13 +3,12 @@
 
 html,
 body {
-    background: #111;
+    background: var(--primary-color);
 }
 
 #container {
     display: flex;
     flex-direction: column;
-    background: #111;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -22,7 +21,7 @@ body {
 }
 
 #cv {
-  background-color: #fff;
+  background-color: var(--menu-items-color);
   box-shadow: 1px 1px 1px 1px;
 }
 
@@ -47,7 +46,7 @@ body {
     font-size: 12px;
     opacity: 0.8;
     color: #fff;
-    width: 220px;
+    width: 420px;
     left: 0px;
     top: 20px;
 }
@@ -97,20 +96,20 @@ body {
 .info .about h1 {
     letter-spacing: -1px;
     font-weight: 300;
-    font-size: 19px;
+    font-size: 24px;
     opacity: 0.95;
 }
 
 .info .about h2 {
     font-weight: 300;
-    font-size: 13px;
+    font-size: 18px;
     opacity: 0.8;
 }
 
 .info .about h3 {
     /* text-transform: uppercase; */
     margin-top: 10px;
-    font-size: 13px;
+    font-size: 16px;
     line-height: normal;
 }
 
@@ -128,7 +127,7 @@ body {
 .info a {
     text-transform: uppercase;
     margin-right: 10px;
-    font-size: 10px;
+    font-size: 16px;
 }
 
 .secinfo {
@@ -137,7 +136,7 @@ body {
     transform: perspective(800px);
     font-family: "Quantico", sans-serif;
     position: absolute;
-    font-size: 22px;
+    font-size: 28px;
     opacity: 0.8;
     color: #fff;
     width: 720px;
@@ -153,7 +152,7 @@ body {
 .secinfo h1,
 .secinfo h2,
 .secinfo h3 {
-    font-size: 22px;
+    font-size: 28px;
     line-height: 1;
     margin: 5px 0;
 }
@@ -197,14 +196,14 @@ body {
 
 .secinfo .about h2 {
     font-weight: 300;
-    font-size: 13px;
+    font-size: 18px;
     opacity: 0.8;
 }
 
 .secinfo .about h3 {
     /* text-transform: uppercase; */
     margin-top: 10px;
-    font-size: 11px;
+    font-size: 18px;
     line-height: normal;
 }
 
