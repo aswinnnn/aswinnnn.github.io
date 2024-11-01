@@ -2,17 +2,20 @@ import { randomFloat } from "./utils.js";
 
 export const ThemeEngine = {
     // Constants
-    PHI: 1.618033988749895,
+    PHI:  137.5077663,
     TAU: Math.PI * 2,
 
     // Enhanced color harmony system
     harmony: {
         // Advanced color schemes based on artistic color theory
         schemes: {
-            complementary: h => [h, (h + 180) % 360],
-            splitComplementary: h => [h, (h + 150) % 360, (h + 210) % 360],
-            triadic: h => [h, (h + 120) % 360, (h + 240) % 360],
-            tetradic: h => [h, (h + 90) % 360, (h + 180) % 360, (h + 270) % 360],
+            complementary: h => [h, (h + 180 + (Math.random() * 20 - 10)) % 360],
+            splitComplementary: h => {
+                const offset = Math.random() * 20 - 10;
+                return [h, (h + 150 + offset) % 360, (h + 210 - offset) % 360];
+            },
+            triadic: h => [h, (h + 120) % 360, (h + Math.random()*1000) % 360],
+            tetradic: h => [h, (h + 90) % 360, (h + 180) % 360, (h + Math.random()*1000) % 360],
             analogous: h => [h, (h + 30) % 360, (h + 60) % 360],
         },
 
@@ -69,7 +72,7 @@ export const ThemeEngine = {
 
         // Harmonic oscillator with damping
         harmonicMotion: {
-            create(frequency = 28, damping = 0.8, amplitude = 3) {
+            create(frequency = Math.random * 100, damping = Math.random(), amplitude = Math.random()*10) {
                 return t => {
                     const omega = frequency * Math.PI * 2;
                     return amplitude * Math.exp(-damping * t) *
@@ -100,7 +103,7 @@ export const ThemeEngine = {
         },
 
         // Enhanced contrast adjustment that maintains aesthetic appeal
-        ensureContrast(color, background, minRatio = 4.5) {
+        ensureContrast(color, background, minRatio = Math.random()*10) {
             const adjustColor = (hsl) => {
                 // Preserve hue but adjust saturation and lightness
                 const steps = [
@@ -170,7 +173,7 @@ export const ThemeEngine = {
     },
 
     // Enhanced color generation
-    generatePalette(hue, complexity = 0.5) {
+    generatePalette(hue, complexity = Math.random()) {
         const scheme = complexity < 0.3 ? 'analogous' :
             complexity < 0.6 ? 'splitComplementary' : 'tetradic';
 
@@ -192,8 +195,8 @@ export const ThemeEngine = {
 
     // Enhanced animation application
     apply(hue = randomFloat({
-        minDifference: 0.5,
-        entropyFactor: 3
+        minDifference: 0.8,
+        entropyFactor: Math.random() * 10
     }) * 360) {
         const colors = this.generatePalette(hue);
         const root = document.documentElement;
