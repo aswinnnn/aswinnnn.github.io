@@ -1,45 +1,30 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0", style="viewport-fit: contain;">
-    <link rel="stylesheet" href="/blog/style.css" />
-    <!-- Primary Meta Tags -->
-    <title>Aswin | Blogs</title>
-    <meta name="theme-color" content="#e8b398">
-    <meta name="title" content="Aswin.">
-    <meta name="description" content="A website for...something">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://aswinnnn.github.io/">
-    <meta property="og:title" content="Aswin.">
-    <meta property="og:description" content="A website for...something">
-    <meta property="og:image"
-        content="https://media.discordapp.net/attachments/1002212458502557718/1004709855971512370/unknown.png?width=1440&height=690">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://aswinnnn.github.io/">
-    <meta property="twitter:title" content="Aswin.">
-    <meta property="twitter:description" content="A website for...something">
-    <meta property="twitter:image"
-        content="https://media.discordapp.net/attachments/1002212458502557718/1004709855971512370/unknown.png?width=1440&height=690">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Posts</title>
+    <link rel="stylesheet" href="/assets/theme.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="/home/new/loadtheme.js"></script>
 </head>
-
 <body>
-    <h1 class="title">Blogs.</h1>
-    <h3 id="time">tech write-ups and... absurdist commentary?</h3>
+    <div class="site-title"> blogs. </div>
+    <table class="blog-table" id="blogTable">
+        <thead>
+            <tr>
+                <th class="number" data-sort="number" data-direction="↓">#</th>
+                <th data-sort="title" data-direction="↓">Title</th>
+                <th class="date" data-sort="date" data-direction="↓">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be loaded dynamically -->
+        </tbody>
+    </table>
+    <div id="loadingSpinner" class="spinner"></div>
+    <div id="errorMessage" class="error-message" style="display: none;"></div>
 
-    <div class="griddy">
-
-        <a href="/blog/Reverse-Engineering-the-We-Heart-It-API/">• Reverse Engineering a (Popular) Image-sharing Website.    [ 8th August 2022 ]</a>
-
-    </div>
-
-    <section class="broker"></section>
-    <footer style="text-align: center;">
-        <p>Made with 🖤 by <a href="https://github.com/aswinnnn">Aswin.</a> </p>
-    </footer>
+    <script src="blogTable.js"></script>
 </body>
-
 </html>
