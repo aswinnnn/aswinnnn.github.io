@@ -1,0 +1,32 @@
+{
+  "0": {
+    "id": 1,
+    "title": "Getting Started with Web Development",
+    "publishedAt": "2024-03-15",
+    "slug": "getting-started-web-dev"
+  },
+  "1": {
+    "id": 2,
+    "title": "Understanding CSS Grid Layout",
+    "publishedAt": "2024-03-14",
+    "slug": "css-grid-layout"
+  },
+  "2": {
+    "id": 3,
+    "title": "JavaScript Fundamentals Guide",
+    "publishedAt": "2024-03-13",
+    "slug": "javascript-fundamentals"
+  },
+  "3": {
+    "id": 4,
+    "title": "Building Responsive Websites",
+    "publishedAt": "2024-03-12",
+    "slug": "responsive-websites"
+  },
+  "4": {
+    "id": 5,
+    "title": "Introduction to Web Accessibility",
+    "publishedAt": "2024-03-11",
+    "slug": "web-accessibility"
+  }
+}
