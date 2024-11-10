@@ -135,7 +135,7 @@ body {
 }
 
 .blog-table .title::after {
-  content: '▶';
+  content: 'ജ';
   position: absolute;
   right: 0;
   opacity: 0;
@@ -330,7 +330,7 @@ body {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 560px) {
   .site-title {
     font-size: 1.8rem;
   }
