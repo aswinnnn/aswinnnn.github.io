@@ -189,54 +189,192 @@ body {
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
-
-/* Responsive Design */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   .blog-table {
-      font-size: 0.95rem;
+    max-width: 95%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .site-title {
+    font-size: 2.5rem;
+  }
+  
+  .blog-table td {
+    font-size: 1.3rem;
   }
 }
 
 @media (max-width: 768px) {
-  .blog-table {
-      font-size: 0.9rem;
+  body {
+    padding: 15px;
+  }
+
+  .site-title {
+    font-size: 2rem;
   }
   
-  .blog-table td,
+  .blog-table td {
+    font-size: 1.2rem;
+    padding: 12px;
+  }
+  
   .blog-table th {
-      padding: 12px;
+    padding: 10px;
+  }
+
+  .blog-table .number {
+    width: 40px;
   }
 }
 
-@media (max-width: 640px) {
-  .blog-table .date {
-      display: none;
+/* @media (max-width: 640px) {
+  .site-title {
+    font-size: 1.8rem;
+  }
+
+  body {
+    padding: 10px;
   }
   
   .blog-table {
-      font-size: 0.85rem;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .blog-table td {
+    font-size: 1.1rem;
+    padding: 10px;
+  }
+
+  .blog-table .date {
+    width: 100px;
   }
 }
 
 @media (max-width: 480px) {
-  .blog-table td,
+  .site-title {
+    font-size: 1.5rem;
+  }
+
+  .blog-table td {
+    font-size: 1rem;
+    padding: 8px;
+  }
+
   .blog-table th {
-      padding: 8px;
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+
+  .blog-table .number {
+    width: 30px;
+  }
+
+  .blog-table .date {
+    width: 90px;
+  }
+} */
+@media (max-width: 574px) {
+  .site-title {
+    font-size: 1.8rem;
+  }
+
+  body {
+    padding: 10px;
   }
   
-  .blog-table .number {
-      width: 30px;
+  .blog-table td {
+    font-size: 1.1rem;
+    padding: 10px;
+  }
+
+  /* Restructure table for mobile */
+  .blog-table {
+    display: table;
+    width: 100%;
+  }
+
+  .blog-table .date {
+    display: none; /* Hide original date column */
+  }
+
+  /* Add date under title */
+  .blog-table .title {
+    position: relative;
+    padding-bottom: 24px; /* Make room for date */
+  }
+
+  .blog-table .title::before {
+    content: attr(data-date); /* Get date from data attribute */
+    position: absolute;
+    bottom: 8px;
+    left: 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    opacity: 0.9;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    transition: all 0.2s ease;
+  }
+
+  /* Adjust arrow position to account for date */
+  .blog-table .title::after {
+    top: 8px; /* Align with first line of title */
+  }
+
+  /* Hover state adjustments */
+  .blog-table tr:hover .title::before {
+    color: var(--accent);
   }
 }
 
-/* Touch device optimizations */
-@media (hover: none) {
-  .blog-table tr:hover {
-      transform: none;
+@media (max-width: 480px) {
+  .site-title {
+    font-size: 1.8rem;
+  }
+
+  .blog-table td {
+    font-size: 1.2rem;
+    padding: 8px;
+  }
+
+  .blog-table th {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .blog-table .number {
+    width: 15px;
+  }
+
+  /* Further adjust title padding for smaller screens */
+  .blog-table .title {
+    padding-bottom: 20px;
+  }
+}
+
+/* Touch device optimization - keep original hover states but improve touch targets */
+@media (hover: none) and (pointer: coarse) {
+  .blog-table td,
+  .blog-table th {
+    padding: 12px;  /* Larger touch targets */
   }
   
-  .blog-table .title::after {
-      opacity: 0.5;
-      right: 8px;
+  .blog-table tr:active {
+    background-color: var(--hover-bg);
+  }
+}
+
+/* Handle orientation changes */
+@media (orientation: landscape) and (max-height: 500px) {
+  .site-title {
+    margin-bottom: 10px;
+  }
+  
+  .blog-table td,
+  .blog-table th {
+    padding: 8px;
   }
 }
