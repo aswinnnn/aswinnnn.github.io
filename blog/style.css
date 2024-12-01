@@ -1,21 +1,32 @@
 :root {
-  --background: #121212;
-  --text: #ffffff;
+  --background: #5d8028;
+  --text: #12150E;
   --text-secondary: #b3b3b3;
   --hover-bg: rgba(255, 255, 255, 0.1);
   --border: #282828;
-  --accent: var(--primary-color);
-  --accent-hover: var(--menu-items-color);
+  --c1: #fafafa;
+  --c2: #7B6EC0;
+  --c3: #f2faf2;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 body {
+  background: repeating-linear-gradient(45deg, var(--c1), var(--c2) 55%, var(--c3) 20%);
+  background-size: 100% 100%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background: var(--background);
+  /* background: var(--background); */
   color: var(--text);
   line-height: 1.5;
   margin: 0;
   padding: 20px;
 }
+
 .site-title {
   font-family: 'Times New Roman', Times, serif;
   font-size: 3rem;
@@ -33,348 +44,30 @@ body {
   color: var(--menu-items-color);
   -webkit-backdrop-filter: contrast(40%);
   backdrop-filter: contrast(40%);
-  background-color: var(--primary-color);
+  background-color: #2e662a;
   border-radius: 0.5rem;
-}
-.blog-table {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  border-collapse: collapse;
-  border-spacing: 0;
-  position: relative;
-}
-
-.blog-table thead {
-  position: sticky;
-  top: 0;
-  background: var(--background);
-  z-index: 10;
-  border-bottom: 1px solid var(--border);
-}
-
-.blog-table th {
-  text-align: left;
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-  font-weight: 400;
-  padding: 8px 16px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  user-select: none;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.blog-table th:hover {
-  color: var(--text);
-}
-
-.blog-table th.active {
-  color: var(--accent);
-}
-
-.blog-table th::after {
-  content: '↕';
-  margin-left: 5px;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.blog-table th:hover::after {
-  opacity: 0.5;
-}
-
-.blog-table th.active::after {
-  opacity: 1;
-  content: attr(data-direction);
-}
-
-.blog-table td {
-  padding: 16px;
-  border-radius: 4px;
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 1.5rem;
-  transition: all 300ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
-}
-
-.blog-table tbody tr {
-  transition: all 0.2s ease;
-  position: relative;
-}
-
-.blog-table tbody tr:hover {
-  background-color: var(--hover-bg);
-  cursor: pointer;
-  transform: scale(1.002);
-}
-
-.blog-table tbody tr:active {
-  transform: scale(0.995);
-}
-
-.blog-table .number {
-  width: 50px;
-  color: var(--text-secondary);
-}
-
-.blog-table .title {
-  font-weight: 500;
-  position: relative;
-  padding-right: 24px;
-}
-
-.blog-table .date {
-  width: 150px;
-  text-align: right;
-  color: var(--text-secondary);
-}
-
-.blog-table tr:hover .number {
-  color: var(--accent);
-}
-
-.blog-table .title::after {
-  content: 'ജ';
-  position: absolute;
-  right: 0;
-  opacity: 0;
-  color: var(--accent);
-  transition: all 0.2s ease;
-  font-size: 0.8em;
-}
-
-.blog-table tr:hover .title::after {
-  opacity: 1;
-  right: 8px;
-}
-
-/* Loading state */
-@keyframes shimmer {
-  0% { background-position: -1000px 0; }
-  100% { background-position: 1000px 0; }
-}
-
-.blog-table.loading tbody tr {
-  background: linear-gradient(90deg, 
-      var(--background) 0%,
-      var(--hover-bg) 50%,
-      var(--background) 100%);
-  background-size: 1000px 100%;
-  animation: shimmer 2s infinite linear;
-}
-
-/* Error state */
-.error-message {
-  color: #ff4444;
-  text-align: center;
-  padding: 20px;
-  background: rgba(255, 68, 68, 0.1);
-  border-radius: 4px;
-  margin: 20px auto;
-  max-width: 600px;
-}
-
-/* Loading spinner */
-.spinner {
-  width: 40px;
-  height: 40px;
-  margin: 40px auto;
-  border: 3px solid var(--border);
-  border-top-color: var(--accent);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-@media (max-width: 1200px) {
-  .blog-table {
-    max-width: 95%;
-  }
-}
-
-@media (max-width: 1024px) {
-  .site-title {
-    font-size: 2.5rem;
-  }
-  
-  .blog-table td {
-    font-size: 1.3rem;
-  }
-}
-
-@media (max-width: 768px) {
-  body {
-    padding: 15px;
-  }
-
-  .site-title {
-    font-size: 2rem;
-  }
-  
-  .blog-table td {
-    font-size: 1.2rem;
-    padding: 12px;
-  }
-  
-  .blog-table th {
-    padding: 10px;
-  }
-
-  .blog-table .number {
-    width: 40px;
-  }
-}
-
-/* @media (max-width: 640px) {
-  .site-title {
-    font-size: 1.8rem;
-  }
-
-  body {
-    padding: 10px;
-  }
-  
-  .blog-table {
-    display: block;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .blog-table td {
-    font-size: 1.1rem;
-    padding: 10px;
-  }
-
-  .blog-table .date {
-    width: 100px;
-  }
-}
-
-@media (max-width: 480px) {
-  .site-title {
-    font-size: 1.5rem;
-  }
-
-  .blog-table td {
-    font-size: 1rem;
-    padding: 8px;
-  }
-
-  .blog-table th {
-    padding: 8px;
-    font-size: 0.8rem;
-  }
-
-  .blog-table .number {
-    width: 30px;
-  }
-
-  .blog-table .date {
-    width: 90px;
-  }
-} */
-@media (max-width: 574px) {
-  .site-title {
-    font-size: 1.8rem;
-  }
-
-  body {
-    padding: 10px;
-  }
-  
-  .blog-table td {
-    font-size: 1.1rem;
-    padding: 10px;
-  }
-
-  /* Restructure table for mobile */
-  .blog-table {
-    display: table;
-    width: 100%;
-  }
-
-  .blog-table .date {
-    display: none; /* Hide original date column */
-  }
-
-  /* Add date under title */
-  .blog-table .title {
-    position: relative;
-    padding-bottom: 24px; /* Make room for date */
-  }
-
-  .blog-table .title::before {
-    content: attr(data-date); /* Get date from data attribute */
-    position: absolute;
-    bottom: 8px;
-    left: 0;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    font-style: italic;
-    opacity: 0.9;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    transition: all 0.2s ease;
-  }
-
-  /* Adjust arrow position to account for date */
-  .blog-table .title::after {
-    top: 8px; /* Align with first line of title */
-  }
-
-  /* Hover state adjustments */
-  .blog-table tr:hover .title::before {
-    color: var(--accent);
-  }
-}
-
-@media (max-width: 560px) {
-  .site-title {
-    font-size: 1.8rem;
-  }
-
-  .blog-table td {
-    font-size: 1.2rem;
-    padding: 8px;
-  }
-
-  .blog-table th {
-    padding: 8px;
-    font-size: 0.9rem;
-  }
-
-  .blog-table .number {
-    width: 15px;
-  }
-
-  /* Further adjust title padding for smaller screens */
-  .blog-table .title {
-    padding-bottom: 20px;
-  }
-}
-
-/* Touch device optimization - keep original hover states but improve touch targets */
-@media (hover: none) and (pointer: coarse) {
-  .blog-table td,
-  .blog-table th {
-    padding: 12px;  /* Larger touch targets */
-  }
-  
-  .blog-table tr:active {
-    background-color: var(--hover-bg);
-  }
 }
 
 /* Handle orientation changes */
-@media (orientation: landscape) and (max-height: 500px) {
+@media (max-width: 747px) {
   .site-title {
     margin-bottom: 10px;
   }
-  
-  .blog-table td,
-  .blog-table th {
-    padding: 8px;
+
+  body {
+    background: linear-gradient(to top,
+        var(--color-1, #fafafa) 0%,
+        var(--color-1, #e7f0f5) 33.33%,
+        var(--color-2, #7B6EC0) 33.33%,
+        var(--color-2, #7B6EC0) 66.66%,
+        var(--color-3, #f2faf2) 66.66%,
+        var(--color-3, #c3c0d7) 100%);
+    background-size: 100% 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    /* background: var(--background); */
+    color: var(--text);
+    line-height: 1.5;
+    margin: 0;
+    padding: 20px;
   }
 }

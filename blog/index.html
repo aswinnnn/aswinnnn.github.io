@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,24 +8,87 @@
     <link rel="stylesheet" href="/assets/theme.css">
     <link rel="stylesheet" href="style.css">
     <script src="/home/new/loadtheme.js"></script>
+    <script>
+        // Dynamic Gradient Interaction
+        class GradientInteractor {
+            constructor(element) {
+                this.element = element;
+                this.isMobile = !this.isDesktop();
+                this.setupEventListeners();
+            }
+
+            isDesktop() {
+                return window.matchMedia("(pointer: fine)").matches;
+            }
+
+            setupEventListeners() {
+                if (this.isMobile) {
+                    // Use device orientation for mobile
+                    window.addEventListener('deviceorientation', this.handleOrientation.bind(this));
+                } else {
+                    // Use mouse movement for desktop
+                    this.element.addEventListener('mousemove', this.handleMouseMove.bind(this));
+                }
+            }
+
+            handleMouseMove(event) {
+                const { clientX, clientY } = event;
+                const { width, height } = this.element.getBoundingClientRect();
+
+                // Calculate normalized coordinates (0 to 1)
+                const xPercent = clientX / width;
+                const yPercent = clientY / height;
+
+                this.updateGradient(xPercent, yPercent);
+            }
+
+            handleOrientation(event) {
+                const { beta, gamma } = event; // tilt angles
+
+                // Normalize angles to 0-1 range
+                const xPercent = this.normalizeAngle(gamma, -45, 45);
+                const yPercent = this.normalizeAngle(beta, -45, 45);
+
+                this.updateGradient(xPercent, yPercent);
+            }
+
+            normalizeAngle(angle, min, max) {
+                // Clamp and normalize the angle to 0-1 range
+                const clampedAngle = Math.max(min, Math.min(max, angle));
+                return (clampedAngle - min) / (max - min);
+            }
+
+            updateGradient(xPercent, yPercent) {
+                // Calculate dynamic gradient parameters
+                const angle = 45 + (xPercent * 90); // Vary angle between 45-135 degrees
+                const stop1 = 10 + (yPercent * 10); // First color stop: 10-20%
+                const stop2 = 15 + (yPercent * 10); // Second color stop: 15-25%
+
+                // Update CSS custom properties
+                this.element.style.background = `repeating-linear-gradient(${angle}deg, 
+      var(--c1), 
+      var(--c2) ${stop1*3}%, 
+      var(--c3) ${stop2*5}%)`;
+            }
+
+            // Method to set initial colors if needed
+            setColors(c1, c2, c3) {
+                this.element.style.setProperty('--c1', c1);
+                this.element.style.setProperty('--c2', c2);
+                this.element.style.setProperty('--c3', c3);
+            }
+        }
+
+        // Usage example
+        document.addEventListener('DOMContentLoaded', () => {
+            const element = document.querySelector('body');
+            const gradientInteractor = new GradientInteractor(element);
+        });
+    </script>
 </head>
+
 <body>
     <div class="site-title"> blogs. </div>
-    <table class="blog-table" id="blogTable">
-        <thead>
-            <tr>
-                <th class="number" data-sort="number" data-direction="↓">#</th>
-                <th data-sort="title" data-direction="↓">Title</th>
-                <th class="date" data-sort="date" data-direction="↓">Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Data will be loaded dynamically -->
-        </tbody>
-    </table>
-    <div id="loadingSpinner" class="spinner"></div>
-    <div id="errorMessage" class="error-message" style="display: none;"></div>
-
-    <script src="blogTable.js"></script>
 </body>
+
 </html>
