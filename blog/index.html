@@ -11,10 +11,13 @@
     <script>
         // Dynamic Gradient Interaction
         class GradientInteractor {
+
             constructor(element) {
                 this.element = element;
                 this.isMobile = !this.isDesktop();
                 this.setupEventListeners();
+                this.stop1 = 0;
+                this.stop2 = 0;
             }
 
             isDesktop() {
@@ -61,14 +64,14 @@
             updateGradient(xPercent, yPercent) {
                 // Calculate dynamic gradient parameters
                 const angle = 45 + (xPercent * 90); // Vary angle between 45-135 degrees
-                const stop1 = 10 + (yPercent * 10); // First color stop: 10-20%
-                const stop2 = 15 + (yPercent * 10); // Second color stop: 15-25%
+                this.stop1 = (10 + (yPercent * 10)) * 3; // First color stop: 10-20%
+                this.stop2 = (15 + (yPercent * 10)) * 5; // Second color stop: 15-25%
 
                 // Update CSS custom properties
                 this.element.style.background = `repeating-linear-gradient(${angle}deg, 
       var(--c1), 
-      var(--c2) ${stop1*3}%, 
-      var(--c3) ${stop2*5}%)`;
+      var(--c2) ${this.stop1}%, 
+      var(--c3) ${this.stop2}%)`;
             }
 
             // Method to set initial colors if needed
@@ -79,16 +82,73 @@
             }
         }
 
-        // Usage example
         document.addEventListener('DOMContentLoaded', () => {
             const element = document.querySelector('body');
             const gradientInteractor = new GradientInteractor(element);
+            window.gradint = gradientInteractor;
+
         });
     </script>
 </head>
 
 <body>
     <div class="site-title"> blogs. </div>
+    <div class="griddy">
+        <a class="post" href="/blog/Reverse-Engineering-the-We-Heart-It-API">
+            <div class="p-head">Reverse Engineering A Popular Image-Sharing Website.</div>
+            <div class="p-meta">
+                <time class="p-date" datetime="2024-12-2">December 2, 2024</time>
+                <div class="p-tags">#android #api #decompiling</div>
+            </div>
+            <hr class="p-break">
+            <div class="p-text">When i learnt that my favorite image sharing app (sort of like pinterest)
+                didn't have an API...
+            </div>
+        </a>
+        <a class="post" href="/blog/Reverse-Engineering-the-We-Heart-It-API">
+            <div class="p-head">Reverse Engineering A Popular Image-Sharing Website.</div>
+            <div class="p-meta">
+                <time class="p-date" datetime="2024-12-2">December 2, 2024</time>
+                <div class="p-tags">#android #api #decompiling</div>
+            </div>
+            <hr class="p-break">
+            <div class="p-text">When i learnt that my favorite image sharing app (sort of like pinterest)
+                didn't have an API...
+            </div>
+        </a>
+        <a class="post" href="/blog/Reverse-Engineering-the-We-Heart-It-API">
+            <div class="p-head">Reverse Engineering A Popular Image-Sharing Website.</div>
+            <div class="p-meta">
+                <time class="p-date" datetime="2024-12-2">December 2, 2024</time>
+                <div class="p-tags">#android #api #decompiling</div>
+            </div>
+            <hr class="p-break">
+            <div class="p-text">When i learnt that my favorite image sharing app (sort of like pinterest)
+                didn't have an API...
+            </div>
+        </a>
+    </div>
+    <script>
+        if (!window.matchMedia("(pointer: fine)").matches) {
+            const posts = document.querySelectorAll('.griddy a');
+            posts.forEach((elem) => {
+                elem.style.width = (window.screen.availWidth - 60) + 'px';
+                elem.addEventListener('pointerdown', (e) => {
+                    if (e.pointerType==='touch') {
+                        const meta = elem.querySelector('.p-meta');
+                        meta.style.display = 'flex';
+                        meta.style.justifyContent = 'space-between'
+                    }
+                })
+                elem.addEventListener('pointerup', (e) => {
+                    if (e.pointerType==='touch') {
+                        const meta = elem.querySelector('.p-meta');
+                        meta.style.display = 'none';
+                    }
+                })
+            });
+        }
+    </script>
 </body>
 
 </html>
