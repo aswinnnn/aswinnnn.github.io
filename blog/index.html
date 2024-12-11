@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Posts</title>
-    <link rel="stylesheet" href="/assets/theme.css">
     <link rel="stylesheet" href="style.css">
-    <script src="/home/new/loadtheme.js"></script>
     <script>
         // Dynamic Gradient Interaction
         class GradientInteractor {
@@ -89,6 +87,11 @@
 
         });
     </script>
+    <noscript>
+        I use javascript to load the latest post details from a json file. <br>
+        <a href="index-nojs.html">here</a> is the no-js homepage. <br>
+        (there is a possibility it might not be as updated as this one.)
+    </noscript>
 </head>
 
 <body>
@@ -134,20 +137,72 @@
             posts.forEach((elem) => {
                 elem.style.width = (window.screen.availWidth - 60) + 'px';
                 elem.addEventListener('pointerdown', (e) => {
-                    if (e.pointerType==='touch') {
+                    if (e.pointerType === 'touch') {
                         const meta = elem.querySelector('.p-meta');
                         meta.style.display = 'flex';
                         meta.style.justifyContent = 'space-between'
                     }
                 })
                 elem.addEventListener('pointerup', (e) => {
-                    if (e.pointerType==='touch') {
+                    if (e.pointerType === 'touch') {
                         const meta = elem.querySelector('.p-meta');
                         meta.style.display = 'none';
                     }
                 })
             });
         }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // Fetch posts
+                const response = await fetch('/posts.json');
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const posts = await response.json();
+                console.log('Fetched posts:', posts);
+
+                // Get the griddy container
+                const griddy = document.querySelector('.griddy');
+
+                if (!griddy) {
+                    console.error('Griddy container not found!');
+                    return;
+                }
+
+                // Clear existing content
+                griddy.innerHTML = '';
+
+                // Render each post
+                posts.forEach(post => {
+                    // Create post element
+                    const postLink = document.createElement('a');
+                    postLink.href = `/blog/${post.slug}`;
+                    postLink.classList.add('post');
+
+                    // Construct post HTML
+                    postLink.innerHTML = `
+                <div class="p-head">${post.title || 'Untitled Post'}</div>
+                <div class="p-meta">
+                    ${post.readableDate || new Date(post.publishedAt).toLocaleDateString()}
+                    ${post.tags ? `<div class="p-tags">${post.tags}</div>` : ''}
+                </div>
+                <hr class="p-break">
+                <div class="p-text">${post.text || 'No preview available'}</div>
+            `;
+
+                    // Append to griddy
+                    griddy.appendChild(postLink);
+                });
+
+                console.log('Posts rendered successfully');
+            } catch (error) {
+                console.error('Error rendering posts:', error);
+            }
+        });
     </script>
 </body>
 

@@ -1,12 +1,15 @@
 :root {
   --background: #5d8028;
-  --text: #12150E;
+  --text: #8b4747;
   --text-secondary: #b3b3b3;
   --hover-bg: rgba(255, 255, 255, 0.1);
   --border: #282828;
-  --c1: #fafafa;
+  /* --c1: #fafafa;
   --c2: #7B6EC0;
-  --c3: #f2faf2;
+  --c3: #f2faf2; */
+  --c1: #000;
+  --c2: #ffffff;
+  --c3: #000;
 }
 
 html {
@@ -28,6 +31,18 @@ body {
   transition: background 2s cubic-bezier(0.4, 0, 0.2, 1);
   height: 100%;
   width: 100%
+}
+
+.body {
+	/* Fallback */
+	background: hsl(0 0 0 / 50%);
+	color: white;
+
+	@supports (color: oklch(from red l c h)) {
+		--l: clamp(0, (l / var(--l-threshold) - 1) * -infinity, 1);
+		color: oklch(from var(--c1) var(--l) 0 h);
+		background: none;
+	}
 }
 
 .site-title {
@@ -60,13 +75,15 @@ body {
   grid-template-areas: "a a a"
     "b b b";
   padding: 1rem;
+  row-gap: 1rem;
+  column-gap: 1.5rem;
 }
 
 .griddy a {
   display: flex;
   flex-direction: column;
   height: fit-content;
-  width: 28rem;
+  width: calc(100% - 20px);
   text-decoration: none;
   color: var(--text);
   border: dashed #12150ec6;
@@ -168,7 +185,7 @@ body {
     display: flex;
     flex-direction: column;
     height: fit-content;
-    width: 23rem;
+    width: calc(100% - 30px);
     text-decoration: none;
     color: var(--text);
     border: dashed #12150ec6;
