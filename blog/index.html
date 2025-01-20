@@ -6,87 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Posts</title>
     <link rel="stylesheet" href="style.css">
-    <script>
-        // Dynamic Gradient Interaction
-        class GradientInteractor {
-
-            constructor(element) {
-                this.element = element;
-                this.isMobile = !this.isDesktop();
-                this.setupEventListeners();
-                this.stop1 = 0;
-                this.stop2 = 0;
-            }
-
-            isDesktop() {
-                return window.matchMedia("(pointer: fine)").matches;
-            }
-
-            setupEventListeners() {
-                if (this.isMobile) {
-                    // Use device orientation for mobile
-                    window.addEventListener('deviceorientation', this.handleOrientation.bind(this));
-                } else {
-                    // Use mouse movement for desktop
-                    this.element.addEventListener('mousemove', this.handleMouseMove.bind(this));
-                }
-            }
-
-            handleMouseMove(event) {
-                const { clientX, clientY } = event;
-                const { width, height } = this.element.getBoundingClientRect();
-
-                // Calculate normalized coordinates (0 to 1)
-                const xPercent = clientX / width;
-                const yPercent = clientY / height;
-
-                this.updateGradient(xPercent, yPercent);
-            }
-
-            handleOrientation(event) {
-                const { beta, gamma } = event; // tilt angles
-
-                // Normalize angles to 0-1 range
-                const xPercent = this.normalizeAngle(gamma, -45, 45);
-                const yPercent = this.normalizeAngle(beta, -45, 45);
-
-                this.updateGradient(xPercent, yPercent);
-            }
-
-            normalizeAngle(angle, min, max) {
-                // Clamp and normalize the angle to 0-1 range
-                const clampedAngle = Math.max(min, Math.min(max, angle));
-                return (clampedAngle - min) / (max - min);
-            }
-
-            updateGradient(xPercent, yPercent) {
-                // Calculate dynamic gradient parameters
-                const angle = 45 + (xPercent * 90); // Vary angle between 45-135 degrees
-                this.stop1 = (10 + (yPercent * 10)) * 3; // First color stop: 10-20%
-                this.stop2 = (15 + (yPercent * 10)) * 5; // Second color stop: 15-25%
-
-                // Update CSS custom properties
-                this.element.style.background = `repeating-linear-gradient(${angle}deg, 
-      var(--c1), 
-      var(--c2) ${this.stop1}%, 
-      var(--c3) ${this.stop2}%)`;
-            }
-
-            // Method to set initial colors if needed
-            setColors(c1, c2, c3) {
-                this.element.style.setProperty('--c1', c1);
-                this.element.style.setProperty('--c2', c2);
-                this.element.style.setProperty('--c3', c3);
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const element = document.querySelector('body');
-            const gradientInteractor = new GradientInteractor(element);
-            window.gradint = gradientInteractor;
-
-        });
-    </script>
     <noscript>
         I use javascript to load the latest post details from a json file. <br>
         <a href="index-nojs.html">here</a> is the no-js homepage. <br>
@@ -97,39 +16,6 @@
 <body>
     <div class="site-title"> blogs. </div>
     <div class="griddy">
-        <a class="post" href="/blog/Reverse-Engineering-the-We-Heart-It-API">
-            <div class="p-head">Reverse Engineering A Popular Image-Sharing Website.</div>
-            <div class="p-meta">
-                <time class="p-date" datetime="2024-12-2">December 2, 2024</time>
-                <div class="p-tags">#android #api #decompiling</div>
-            </div>
-            <hr class="p-break">
-            <div class="p-text">When i learnt that my favorite image sharing app (sort of like pinterest)
-                didn't have an API...
-            </div>
-        </a>
-        <a class="post" href="/blog/Reverse-Engineering-the-We-Heart-It-API">
-            <div class="p-head">Reverse Engineering A Popular Image-Sharing Website.</div>
-            <div class="p-meta">
-                <time class="p-date" datetime="2024-12-2">December 2, 2024</time>
-                <div class="p-tags">#android #api #decompiling</div>
-            </div>
-            <hr class="p-break">
-            <div class="p-text">When i learnt that my favorite image sharing app (sort of like pinterest)
-                didn't have an API...
-            </div>
-        </a>
-        <a class="post" href="/blog/Reverse-Engineering-the-We-Heart-It-API">
-            <div class="p-head">Reverse Engineering A Popular Image-Sharing Website.</div>
-            <div class="p-meta">
-                <time class="p-date" datetime="2024-12-2">December 2, 2024</time>
-                <div class="p-tags">#android #api #decompiling</div>
-            </div>
-            <hr class="p-break">
-            <div class="p-text">When i learnt that my favorite image sharing app (sort of like pinterest)
-                didn't have an API...
-            </div>
-        </a>
     </div>
     <script>
         if (!window.matchMedia("(pointer: fine)").matches) {
