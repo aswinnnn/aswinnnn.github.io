@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100vh;
+    width: 100vw;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: all 1s;
+}
+
+.hero-img {
+    resize: none;
+    filter: contrast(80%) brightness(50%);
+    overflow: hidden;
+    image-rendering: optimizeQuality;
+    image-orientation: from-image;
+}
+
+.hero-title {
+    position: absolute;
+    padding: 2rem;
+    font-family: 'Playfair Display','Times New Roman', Times, serif;
+    font-weight: 500;
+    font-size: 6vw;
+    color: whitesmoke;
+    margin-top: 30vh;
+    transition: all 1s;
+}
+
+
+.hero-subtitle {
+    position: absolute;
+    font-family: 'Lexend Deca',Arial, Helvetica, sans-serif;
+    font-weight: 350;
+    color: whitesmoke;
+    width: 75vw;
+    height: 20vh;
+    margin-top: 65vh;
+    padding: 2.5rem;
+    word-wrap: break-word;
+}
+
+.hero-subtitle:hover {
+    font-weight: 450;
+}
